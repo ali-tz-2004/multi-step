@@ -15,7 +15,7 @@ module.exports = {
         "1/3": '30%'
       },
       height: {
-        '35': '31rem',
+        '30': '30rem',
       },
       backgroundImage: {
         "slider-desktop": "url('./assets/images/bg-sidebar-desktop.svg')",
