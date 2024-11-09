@@ -19,6 +19,7 @@ module.exports = {
       },
       backgroundImage: {
         "slider-desktop": "url('./assets/images/bg-sidebar-desktop.svg')",
+        "slider-mobile": "url('./assets/images/bg-sidebar-mobile.svg')",
       },
     },
   },

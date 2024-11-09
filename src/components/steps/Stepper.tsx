@@ -18,7 +18,7 @@ const Stepper: React.FC<IStepperProps> = ({
 
   return (
     <div className="w-full flex flex-col md:flex-row md:w-50 bg-white rounded-xl shadow-md md:p-3 md:h-30 relative md:static">
-      <div className="bg-bottom flex justify-center md:flex-col md:justify-start bg-slider-desktop bg-no-repeat bg-cover md:p-6 md:w-1/3 overflow-hidden md:rounded-xl pb-40 md:pb-0">
+      <div className="bg-bottom flex justify-center md:flex-col md:justify-start md:bg-slider-desktop bg-slider-mobile bg-no-repeat bg-cover md:p-6 md:w-1/3 overflow-hidden md:rounded-xl pb-28 md:pb-0">
         {steps.map((step, index) => (
           <div key={index} className="text-center flex items-center p-4 ">
             <div
@@ -42,7 +42,7 @@ const Stepper: React.FC<IStepperProps> = ({
         ))}
       </div>
 
-      <div className="md:m-0 top-20 w-full md:w-2/3 p-6 md:p-8 md:px-20 absolute md:static">
+      <div className="md:m-0 top-20 w-full md:w-2/3 p-4 md:p-8 md:px-20 absolute md:static">
         <div className="text-center rounded-md md:mb-4 bg-white p-5 md:p-0">
           {React.cloneElement(CurrentStepComponent as React.ReactElement, {
             nextStep,
