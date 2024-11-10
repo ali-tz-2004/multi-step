@@ -90,7 +90,7 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
             </div>
             <input
               type="text"
-              className={`border border-gray-300 text-sm rounded-lg block w-full p-2.5 ${
+              className={`border border-gray-300 text-sm rounded-lg block w-full p-2.5 cursor-pointer ${
                 field.errorMessage
                   ? "border-red-500"
                   : "focus:border-foreground"
