@@ -31,7 +31,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
       <br />
       <br />
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-between w-full gap-4">
+        <div className="flex justify-between w-full gap-4 flex-col md:flex-row">
           {planCards.map((plane, index) => (
             <div className="flex-1" key={index}>
               <input
@@ -44,23 +44,29 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                 htmlFor={plane.id}
                 className="block p-4 border rounded-lg cursor-pointer peer-checked:bg-background peer-checked:border-borderInput"
               >
-                {plane.icon}
-                <h3 className="font-bold text-lg pt-6">{plane.title}</h3>
-                {!isToggled && (
-                  <span className="opacity-50 text-black text-xs">
-                    {plane.month}
-                  </span>
-                )}
-                {isToggled && (
-                  <>
-                    <span className="opacity-50 text-black text-xs block">
-                      {plane.year}
-                    </span>
-                    <span className="opacity-50 text-black text-xs block">
-                      {plane.messageFree}
-                    </span>
-                  </>
-                )}
+                <div className="flex items-start md:block">
+                  {plane.icon}
+                  <div>
+                    <h3 className="font-bold text-lg md:pt-6 pr-2 md:pr-0">
+                      {plane.title}
+                    </h3>
+                    {!isToggled && (
+                      <span className="opacity-50 text-black text-xs">
+                        {plane.month}
+                      </span>
+                    )}
+                    {isToggled && (
+                      <>
+                        <span className="opacity-50 text-black text-xs block">
+                          {plane.year}
+                        </span>
+                        <span className="opacity-50 text-black text-xs block">
+                          {plane.messageFree}
+                        </span>
+                      </>
+                    )}
+                  </div>
+                </div>
               </label>
             </div>
           ))}
