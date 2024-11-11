@@ -48,18 +48,6 @@ const Stepper: React.FC<IStepperProps> = ({
             nextStep,
           })}
         </div>
-
-        <div className="flex justify-between">
-          <button
-            onClick={prevStep}
-            disabled={currentStep === 0}
-            className={`px-4 py-2 text-white bg-gray-500 rounded-md disabled:bg-gray-300 ${
-              currentStep === 0 ? "hidden" : ""
-            }`}
-          >
-            Go Back
-          </button>
-        </div>
       </div>
     </div>
   );
