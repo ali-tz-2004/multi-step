@@ -46,6 +46,7 @@ const Stepper: React.FC<IStepperProps> = ({
         <div className="text-center rounded-md md:mb-4 bg-white p-5 md:p-0">
           {React.cloneElement(CurrentStepComponent as React.ReactElement, {
             nextStep,
+            prevStep,
           })}
         </div>
       </div>

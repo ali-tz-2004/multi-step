@@ -4,8 +4,8 @@ import {
   errorMessageValid,
 } from "../../assets/errors/errorMessages";
 import { IError } from "../../models/error";
-import { IPersonalInfoProps } from "../../models/PersonalInfoProps";
 import { getFormInfo } from "../../constants/formInfo";
+import { IPersonalInfoProps } from "../../models/personalInfoProps";
 
 export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   const [name, setName] = useState("");
