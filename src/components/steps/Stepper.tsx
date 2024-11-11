@@ -1,12 +1,5 @@
 import React from "react";
-import { IStep } from "../../models/step";
-
-interface IStepperProps {
-  steps: IStep[];
-  currentStep: number;
-  nextStep: () => void;
-  prevStep: () => void;
-}
+import { IStepperProps } from "../../models/step";
 
 const Stepper: React.FC<IStepperProps> = ({
   steps,

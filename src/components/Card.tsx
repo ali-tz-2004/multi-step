@@ -1,21 +1,6 @@
 import { useState } from "react";
-import { IStep } from "../models/step";
-import { AddOns } from "./steps/Add-ons";
-import { PersonalInfo } from "./steps/Personal-info";
-import { SelectPlan } from "./steps/Select-plane";
 import Stepper from "./steps/Stepper";
-import { Summary } from "./steps/Summary";
-
-const steps: IStep[] = [
-  { title: "مرحله 1", description: "درباره شما", children: <PersonalInfo /> },
-  {
-    title: "مرحله 2",
-    description: "انتخاب برنامه ریزی",
-    children: <SelectPlan />,
-  },
-  { title: "مرحله 3", description: "افزودنی ها", children: <AddOns /> },
-  { title: "مرحله 4", description: "خلاصه", children: <Summary /> },
-];
+import { steps } from "../constants/step";
 
 export const Card = () => {
   const [currentStep, setCurrentStep] = useState(0);

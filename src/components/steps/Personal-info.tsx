@@ -8,9 +8,9 @@ import { getFormInfo } from "../../constants/formInfo";
 import { IPersonalInfoProps } from "../../models/personalInfoProps";
 
 export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [name, setName] = useState(localStorage.getItem("name") ?? "");
+  const [email, setEmail] = useState(localStorage.getItem("email") ?? "");
+  const [phone, setPhone] = useState(localStorage.getItem("phone") ?? "");
 
   const [errors, setErrors] = useState<IError>({
     name: "",
@@ -39,6 +39,9 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validateForm() && nextStep) {
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
+      localStorage.setItem("phone", phone);
       nextStep();
     }
   };

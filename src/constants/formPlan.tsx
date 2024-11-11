@@ -9,6 +9,7 @@ interface IPlanCards {
   month: string;
   year: string;
   messageFree?: string;
+  value: string;
 }
 
 export const planCards: IPlanCards[] = [
@@ -19,6 +20,7 @@ export const planCards: IPlanCards[] = [
     month: "10 ت / ماهانه",
     year: "100 ت / 1 ساله",
     messageFree: "2 ماه رایگان",
+    value: "arcade",
   },
   {
     id: "plane-2",
@@ -27,6 +29,7 @@ export const planCards: IPlanCards[] = [
     month: "20 ت / ماهانه",
     year: "200 ت / 1 ساله",
     messageFree: "2 ماه رایگان",
+    value: "advance",
   },
   {
     id: "plane-3",
@@ -35,5 +38,6 @@ export const planCards: IPlanCards[] = [
     month: "40 ت / ماهانه",
     year: "400 ت / 1 ساله",
     messageFree: "2 ماه رایگان",
+    value: "pro",
   },
 ];

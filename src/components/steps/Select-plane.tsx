@@ -7,7 +7,13 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   nextStep,
   prevStep,
 }) => {
-  const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState<boolean>(
+    localStorage.getItem("isToggled") === "true"
+  );
+
+  const [planeName, setPlaneName] = useState(
+    localStorage.getItem("planeName") ?? ""
+  );
 
   const handleToggle = () => {
     setIsToggled(!isToggled);
@@ -16,8 +22,14 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (nextStep) {
+      localStorage.setItem("planeName", planeName);
+      localStorage.setItem("isToggled", isToggled.toString());
       nextStep();
     }
+  };
+
+  const changeValuePlanHandler = (e: React.FormEvent<HTMLInputElement>) => {
+    setPlaneName(e.currentTarget.value);
   };
 
   return (
@@ -39,6 +51,10 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                 id={plane.id}
                 className="hidden peer"
                 name="radio"
+                value={plane.value}
+                checked={planeName == plane.value}
+                onChange={changeValuePlanHandler}
+                required
               />
               <label
                 htmlFor={plane.id}
