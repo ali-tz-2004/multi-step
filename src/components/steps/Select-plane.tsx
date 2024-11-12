@@ -37,7 +37,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
       <h1 className="font-bold text-3xl">طرح خود را انتخاب کنید</h1>
       <span className="opacity-50 text-black text-xs">
         <span className="opacity-50 text-black text-xs">
-          شما می توانید صورتحساب ماهانه یا سالانه را داشته باشید
+          شما می توانید صورتحساب ماهانه یا سالانه را داشته باشید.
         </span>
       </span>
       <br />
