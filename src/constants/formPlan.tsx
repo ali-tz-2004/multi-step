@@ -3,7 +3,8 @@ import { IconArcade } from "../components/icons/Icon-arcade";
 import { IconPro } from "../components/icons/Icon-pro";
 
 interface IPlanCards {
-  id: string;
+  id: number;
+  idTag: string;
   icon: React.ReactNode;
   title: string;
   month: string;
@@ -14,7 +15,8 @@ interface IPlanCards {
 
 export const planCards: IPlanCards[] = [
   {
-    id: "plane-1",
+    id: 1,
+    idTag: "plane-1",
     icon: <IconArcade />,
     title: "آرکید",
     month: "10 ت / ماهانه",
@@ -23,7 +25,8 @@ export const planCards: IPlanCards[] = [
     value: "arcade",
   },
   {
-    id: "plane-2",
+    id: 2,
+    idTag: "plane-2",
     icon: <IconAdvanced />,
     title: "پیشرفته",
     month: "20 ت / ماهانه",
@@ -32,7 +35,8 @@ export const planCards: IPlanCards[] = [
     value: "advance",
   },
   {
-    id: "plane-3",
+    id: 3,
+    idTag: "plane-3",
     icon: <IconPro />,
     title: "حرفه ای",
     month: "40 ت / ماهانه",

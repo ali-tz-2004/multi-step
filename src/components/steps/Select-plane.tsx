@@ -1,36 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToggleButton from "../Toggle-button";
 import { ISelectPlanProps } from "../../models/selectPlanProps";
 import { planCards } from "../../constants/formPlan";
+import { PlaneType } from "../../models/utils";
 
 export const SelectPlan: React.FC<ISelectPlanProps> = ({
   nextStep,
   prevStep,
 }) => {
-  const [isToggled, setIsToggled] = useState<boolean>(
-    localStorage.getItem("isToggled") === "true"
-  );
+  const [isToggled, setIsToggled] = useState<PlaneType>(PlaneType.monthly);
 
-  const [planeName, setPlaneName] = useState(
-    localStorage.getItem("planeName") ?? ""
-  );
+  const [planeId, setPlaneId] = useState(0);
 
   const handleToggle = () => {
-    setIsToggled(!isToggled);
+    setIsToggled(
+      isToggled == PlaneType.monthly ? PlaneType.yearly : PlaneType.monthly
+    );
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (nextStep) {
-      localStorage.setItem("planeName", planeName);
-      localStorage.setItem("isToggled", isToggled.toString());
+      localStorage.setItem("planeId", planeId.toString());
+      localStorage.setItem("planeType", isToggled.toString());
       nextStep();
     }
   };
 
   const changeValuePlanHandler = (e: React.FormEvent<HTMLInputElement>) => {
-    setPlaneName(e.currentTarget.value);
+    setPlaneId(+e.currentTarget.value);
   };
+
+  useEffect(() => {
+    const storedPlaneId = localStorage.getItem("planeId");
+    setPlaneId(storedPlaneId ? +storedPlaneId : 0);
+
+    const storedPlaneType = localStorage.getItem("planeType");
+    setIsToggled(storedPlaneType ? +storedPlaneType : PlaneType.monthly);
+  }, []);
 
   return (
     <div className="text-start">
@@ -48,16 +55,16 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
             <div className="flex-1" key={index}>
               <input
                 type="radio"
-                id={plane.id}
+                id={plane.idTag}
                 className="hidden peer"
                 name="radio"
-                value={plane.value}
-                checked={planeName == plane.value}
+                value={plane.id}
+                checked={planeId == plane.id}
                 onChange={changeValuePlanHandler}
                 required
               />
               <label
-                htmlFor={plane.id}
+                htmlFor={plane.idTag}
                 className="block p-4 border rounded-lg cursor-pointer peer-checked:bg-background peer-checked:border-borderInput"
               >
                 <div className="flex items-start md:block">
@@ -66,12 +73,12 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                     <h3 className="font-bold text-lg md:pt-6 pr-2 md:pr-0">
                       {plane.title}
                     </h3>
-                    {!isToggled && (
+                    {isToggled == PlaneType.monthly && (
                       <span className="opacity-50 text-black text-xs">
                         {plane.month}
                       </span>
                     )}
-                    {isToggled && (
+                    {isToggled == PlaneType.yearly && (
                       <>
                         <span className="opacity-50 text-black text-xs block">
                           {plane.year}

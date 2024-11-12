@@ -1,9 +1,4 @@
-interface IToggleButton {
-  isToggled: boolean;
-  onToggle: () => void;
-  label1?: string;
-  label2?: string;
-}
+import { IToggleButton, PlaneType } from "../models/utils";
 
 const ToggleButton = ({
   isToggled,
@@ -13,7 +8,11 @@ const ToggleButton = ({
 }: IToggleButton) => {
   return (
     <div dir="ltr" className="flex items-center justify-center">
-      <h3 className={`font-bold text-lg p-2 ${!isToggled ? "" : "opacity-50"}`}>
+      <h3
+        className={`font-bold text-lg p-2 ${
+          isToggled == PlaneType.monthly ? "" : "opacity-50"
+        }`}
+      >
         {label1}
       </h3>
       <button
@@ -23,11 +22,15 @@ const ToggleButton = ({
       >
         <div
           className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
-            isToggled ? "translate-x-6" : "translate-x-0"
+            isToggled == PlaneType.yearly ? "translate-x-6" : "translate-x-0"
           }`}
         ></div>
       </button>
-      <h3 className={`font-bold text-lg p-2 ${isToggled ? "" : "opacity-50"}`}>
+      <h3
+        className={`font-bold text-lg p-2 ${
+          isToggled == PlaneType.yearly ? "" : "opacity-50"
+        }`}
+      >
         {label2}
       </h3>
     </div>

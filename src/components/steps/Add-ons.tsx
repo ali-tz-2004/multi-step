@@ -4,12 +4,12 @@ import { IAddOnsProps } from "../../models/addOnsProps";
 
 export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   const isToggle = localStorage.getItem("isToggled") === "true";
-  const [checkedItems, setCheckedItems] = useState<string[]>(() => {
+  const [checkedItems, setCheckedItems] = useState<number[]>(() => {
     const storedItems = localStorage.getItem("checkedItems");
     return storedItems ? JSON.parse(storedItems) : [];
   });
 
-  const handleCheckboxChange = (id: string) => {
+  const handleCheckboxChange = (id: number) => {
     setCheckedItems((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
@@ -33,8 +33,8 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
       <form onSubmit={handleSubmit}>
         {addOnsList.map((addOns) => (
           <label
-            key={addOns.id}
-            htmlFor={addOns.id}
+            key={addOns.name}
+            htmlFor={addOns.name}
             className={`flex items-center h-full p-2 mb-2 rounded-lg border cursor-pointer select-none ${
               checkedItems.includes(addOns.id)
                 ? "bg-background border-borderInput"
@@ -42,9 +42,9 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
             }`}
           >
             <input
-              id={addOns.id}
+              id={addOns.name}
               type="checkbox"
-              name={addOns.id}
+              name={addOns.name}
               className="w-4 h-4 bg-gray-100 border-gray-300 rounded ml-2 accent-blue-600"
               checked={checkedItems.includes(addOns.id)}
               onChange={() => handleCheckboxChange(addOns.id)}

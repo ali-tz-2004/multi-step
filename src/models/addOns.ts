@@ -5,7 +5,8 @@ export enum AddOnId {
 }
 
 export interface IAddOns {
-  id: AddOnId;
+  id: number;
+  name: AddOnId;
   label: string;
   description: string;
   priceMonth: string;
