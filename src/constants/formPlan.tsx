@@ -1,17 +1,7 @@
 import { IconAdvanced } from "../components/icons/Icon-advanced";
 import { IconArcade } from "../components/icons/Icon-arcade";
 import { IconPro } from "../components/icons/Icon-pro";
-
-interface IPlanCards {
-  id: number;
-  idTag: string;
-  icon: React.ReactNode;
-  title: string;
-  month: string;
-  year: string;
-  messageFree?: string;
-  value: string;
-}
+import { IPlanCards } from "../models/selectPlane";
 
 export const planCards: IPlanCards[] = [
   {
@@ -20,9 +10,11 @@ export const planCards: IPlanCards[] = [
     icon: <IconArcade />,
     title: "آرکید",
     month: "10 ت / ماهانه",
-    year: "100 ت / 1 ساله",
+    year: "100 ت / سالانه",
     messageFree: "2 ماه رایگان",
     value: "arcade",
+    moneyMonth: 10,
+    moneyYear: 100,
   },
   {
     id: 2,
@@ -30,9 +22,11 @@ export const planCards: IPlanCards[] = [
     icon: <IconAdvanced />,
     title: "پیشرفته",
     month: "20 ت / ماهانه",
-    year: "200 ت / 1 ساله",
+    year: "200 ت / سالانه",
     messageFree: "2 ماه رایگان",
     value: "advance",
+    moneyMonth: 20,
+    moneyYear: 200,
   },
   {
     id: 3,
@@ -40,8 +34,10 @@ export const planCards: IPlanCards[] = [
     icon: <IconPro />,
     title: "حرفه ای",
     month: "40 ت / ماهانه",
-    year: "400 ت / 1 ساله",
+    year: "400 ت / سالانه",
     messageFree: "2 ماه رایگان",
     value: "pro",
+    moneyMonth: 40,
+    moneyYear: 400,
   },
 ];

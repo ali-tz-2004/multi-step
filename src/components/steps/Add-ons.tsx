@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { addOnsList } from "../../constants/addOnsList";
 import { IAddOnsProps } from "../../models/addOnsProps";
+import { PlaneType } from "../../models/utils";
 
 export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
-  const isToggle = localStorage.getItem("isToggled") === "true";
+  const planeType = Number(localStorage.getItem("planeType")) as PlaneType;
+
   const [checkedItems, setCheckedItems] = useState<number[]>(() => {
     const storedItems = localStorage.getItem("checkedItems");
     return storedItems ? JSON.parse(storedItems) : [];
@@ -58,9 +60,9 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
               </div>
               <div>
                 <span className="text-borderInput font-bold text-sm">
-                  {isToggle
-                    ? `${addOns.priceYear}/سالانه`
-                    : `${addOns.priceMonth}/ماهانه`}
+                  {planeType == PlaneType.yearly
+                    ? `${addOns.year}/سالانه`
+                    : `${addOns.month}/ماهانه`}
                 </span>
               </div>
             </div>

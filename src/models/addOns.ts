@@ -9,6 +9,8 @@ export interface IAddOns {
   name: AddOnId;
   label: string;
   description: string;
-  priceMonth: string;
-  priceYear: string;
+  month: string;
+  year: string;
+  moneyMonth: number;
+  moneyYear: number;
 }

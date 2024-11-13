@@ -9,6 +9,7 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         borderInput: "#565096",
+        lightGray: "#F8F9FE"
       },
       width: {
         '50': '50rem',
