@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { IconThankYou } from "../../assets/icons/Icon-thank-you";
-import { addOnsList } from "../../utils/Add-ons-utils";
-import { planCards, PlaneType } from "../../utils/Select-plane-utils";
+import { addOnsList } from "../../utils/steps/Add-ons-utils";
+import { planCards, PlaneType } from "../../utils/steps/Select-plane-utils";
 import {
   IFinalPlane,
   ICheckedItem,
   ISummaryProps,
-} from "../../utils/Summary-utils";
+} from "../../utils/steps/Summary-utils";
+import { StepFooter } from "./Step-footer";
 
 export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
   const planeType = Number(localStorage.getItem("planeType")) as PlaneType;
@@ -92,7 +93,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
   return (
     <>
       {!confirm ? (
-        <div>
+        <form onSubmit={confirmHandler}>
           <h1 className="font-bold text-3xl">تمام کردن</h1>
           <span className="opacity-50 text-black text-sm block">
             قبل از تأیید دوباره بررسی کنید همه چیز درست به نظر می رسد.
@@ -133,23 +134,8 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
         `}</span>
           </div>
           <br />
-          <div className="fixed md:absolute left-0 bg-white w-full p-4 bottom-0 flex justify-between md:p-0">
-            <button
-              type="button"
-              className="px-4 py-2 text-gray-500 rounded-md"
-              onClick={prevStep}
-            >
-              مرحله قبلی
-            </button>
-            <button
-              type="button"
-              onClick={confirmHandler}
-              className="px-4 py-2 text-white bg-foreground rounded-md"
-            >
-              تایید
-            </button>
-          </div>
-        </div>
+          <StepFooter prevStep={prevStep} step={4} />
+        </form>
       ) : (
         <div className="flex justify-center items-center flex-col h-full py-10 md:py-0">
           <IconThankYou />

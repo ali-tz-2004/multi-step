@@ -4,7 +4,8 @@ import {
   ISelectPlanProps,
   planCards,
   PlaneType,
-} from "../../utils/Select-plane-utils";
+} from "../../utils/steps/Select-plane-utils";
+import { StepFooter } from "./Step-footer";
 
 export const SelectPlan: React.FC<ISelectPlanProps> = ({
   nextStep,
@@ -107,22 +108,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
             />
           </div>
         </div>
-        <br />
-        <div className="fixed md:absolute left-0 bg-white w-full p-4 bottom-0 flex justify-between md:p-0">
-          <button
-            type="button"
-            className="px-4 py-2 text-gray-500 rounded-md"
-            onClick={prevStep}
-          >
-            مرحله قبلی
-          </button>
-          <button
-            type="submit"
-            className="px-4 py-2 text-white bg-foreground rounded-md"
-          >
-            مرحله بعدی
-          </button>
-        </div>
+        <StepFooter prevStep={prevStep} />
       </form>
     </div>
   );

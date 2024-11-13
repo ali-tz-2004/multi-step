@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Stepper from "./steps/Stepper";
+import Stepper from "./Stepper";
 import { steps } from "../utils/Stepper-utils";
 
 export const Card = () => {

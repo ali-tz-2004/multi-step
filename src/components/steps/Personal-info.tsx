@@ -7,7 +7,8 @@ import {
   getFormInfo,
   IError,
   IPersonalInfoProps,
-} from "../../utils/Personal-info-utils";
+} from "../../utils/steps/Personal-info-utils";
+import { StepFooter } from "./Step-footer";
 
 export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   const [name, setName] = useState(localStorage.getItem("name") ?? "");
@@ -110,14 +111,7 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
           </div>
         ))}
 
-        <div className="text-end fixed md:absolute left-0 bg-white w-full p-4 bottom-0 md:p-0">
-          <button
-            type="submit"
-            className="px-4 py-2 text-white bg-foreground rounded-md"
-          >
-            مرحله بعدی
-          </button>
-        </div>
+        <StepFooter step={1} />
       </form>
     </div>
   );
