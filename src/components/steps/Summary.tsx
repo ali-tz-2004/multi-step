@@ -70,6 +70,18 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
     setConfirm(true);
   };
 
+  const stepBackHandler = (stepsBack = 2) => {
+    for (let i = 0; i < stepsBack; i++) {
+      if (prevStep) {
+        prevStep();
+      }
+    }
+  };
+
+  const changePlaneHandler = () => {
+    stepBackHandler();
+  };
+
   useEffect(() => {
     fillPanel(planeType);
     fillCheckedItem(planeType);
@@ -99,7 +111,10 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
             <div className="flex justify-between items-center pb-4">
               <div>
                 <h3 className="text-lg">{plane?.title}</h3>
-                <span className="text-sm underline cursor-pointer opacity-50">
+                <span
+                  className="text-sm underline cursor-pointer opacity-50"
+                  onClick={changePlaneHandler}
+                >
                   عوض کردن
                 </span>
               </div>
@@ -127,7 +142,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
         `}</span>
           </div>
           <br />
-          <div className="fixed md:static left-0 bg-white w-full p-4 bottom-0 flex justify-between md:p-0">
+          <div className="fixed md:absolute left-0 bg-white w-full p-4 bottom-0 flex justify-between md:p-0">
             <button
               type="button"
               className="px-4 py-2 text-gray-500 rounded-md"
@@ -145,7 +160,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center items-center flex-col h-full">
+        <div className="flex justify-center items-center flex-col h-full py-10 md:py-0">
           <IconThankYou />
           <h2 className="text-3xl font-bold">ممنون از شما</h2>
           <p className="text-lg text-center">
