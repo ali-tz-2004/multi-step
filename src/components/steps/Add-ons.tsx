@@ -69,7 +69,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
           </label>
         ))}
         <br />
-        <div className="fixed md:static left-0 bg-white w-full p-4 bottom-0 flex justify-between md:p-0">
+        <div className="fixed md:absolute left-0 bg-white w-full p-4 bottom-0 flex justify-between md:p-0">
           <button
             type="button"
             className="px-4 py-2 text-gray-500 rounded-md"

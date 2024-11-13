@@ -108,7 +108,7 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
           </div>
         ))}
 
-        <div className="text-end fixed md:static left-0 bg-white w-full p-4 bottom-0 md:p-0">
+        <div className="text-end fixed md:absolute left-0 bg-white w-full p-4 bottom-0 md:p-0">
           <button
             type="submit"
             className="px-4 py-2 text-white bg-foreground rounded-md"
