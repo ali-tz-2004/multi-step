@@ -25,7 +25,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   };
 
   return (
-    <div className="text-start">
+    <div>
       <h1 className="font-bold text-3xl">افزودنی ها را انتخاب کنید</h1>
       <span className="opacity-50 text-black text-sm">
         افزونه ها به بهبود تجربه بازی شما کمک می کنند.

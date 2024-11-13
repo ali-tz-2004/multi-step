@@ -40,7 +40,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   }, []);
 
   return (
-    <div className="text-start">
+    <div>
       <h1 className="font-bold text-3xl">طرح خود را انتخاب کنید</h1>
       <span className="opacity-50 text-black text-xs">
         <span className="opacity-50 text-black text-xs">

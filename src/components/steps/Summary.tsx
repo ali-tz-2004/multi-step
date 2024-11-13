@@ -3,6 +3,7 @@ import { planCards } from "../../constants/formPlan";
 import { PlaneType } from "../../models/utils";
 import { addOnsList } from "../../constants/addOnsList";
 import { ISummaryProps } from "../../models/summaryProps";
+import { IconThankYou } from "../icons/Icon-thank-you";
 
 interface IFinalPlane {
   title: string;
@@ -22,6 +23,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
   const [plane, setPlane] = useState<IFinalPlane>();
   const [checkedItems, setCheckedItems] = useState<ICheckedItem[]>([]);
   const [total, setTotal] = useState<number>();
+  const [confirm, setConfirm] = useState(false);
 
   const fillPanel = (planeType: PlaneType) => {
     const planeId = localStorage.getItem("planeId");
@@ -64,6 +66,10 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
     ]);
   };
 
+  const confirmHandler = () => {
+    setConfirm(true);
+  };
+
   useEffect(() => {
     fillPanel(planeType);
     fillCheckedItem(planeType);
@@ -81,55 +87,74 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
   }, [planeType, itemList, plane]);
 
   return (
-    <div className="text-start">
-      <h1 className="font-bold text-3xl">تمام کردن</h1>
-      <span className="opacity-50 text-black text-sm block">
-        قبل از تأیید دوباره بررسی کنید همه چیز درست به نظر می رسد.
-      </span>
-      <br />
-      <div className="w-full bg-lightGray p-4 rounded-lg">
-        <div className="flex justify-between items-center pb-5">
-          <div>
-            <h3 className="text-xl">{plane?.title}</h3>
-            <span className="text-sm underline cursor-pointer opacity-50">
-              عوض کردن
-            </span>
+    <>
+      {!confirm ? (
+        <div>
+          <h1 className="font-bold text-3xl">تمام کردن</h1>
+          <span className="opacity-50 text-black text-sm block">
+            قبل از تأیید دوباره بررسی کنید همه چیز درست به نظر می رسد.
+          </span>
+          <br />
+          <div className="w-full bg-lightGray p-4 rounded-lg">
+            <div className="flex justify-between items-center pb-4">
+              <div>
+                <h3 className="text-lg">{plane?.title}</h3>
+                <span className="text-sm underline cursor-pointer opacity-50">
+                  عوض کردن
+                </span>
+              </div>
+              <div>
+                <span className="font-bold text-sm">{plane?.moneyText}</span>
+              </div>
+            </div>
+            <hr />
+            {checkedItems.map((x, index) => (
+              <div
+                className="flex justify-between py-1 overflow-hidden"
+                key={index}
+              >
+                <span className="opacity-50 text-sm">{x.title}</span>
+                <span>{x.moneyText}</span>
+              </div>
+            ))}
           </div>
-          <div>
-            <span className="font-bold text-sm">{plane?.moneyText}</span>
+          <div className="w-full p-4 flex justify-between">
+            <span className="opacity-50 text-sm">{`در کل ${
+              planeType == PlaneType.monthly ? "(ماهانه)" : "(سالانه)"
+            }`}</span>
+            <span className="text-borderInput font-bold text-lg">{`${total}ت/
+         ${planeType == PlaneType.monthly ? "ماهانه" : "سالانه"}
+        `}</span>
+          </div>
+          <br />
+          <div className="fixed md:static left-0 bg-white w-full p-4 bottom-0 flex justify-between md:p-0">
+            <button
+              type="button"
+              className="px-4 py-2 text-gray-500 rounded-md"
+              onClick={prevStep}
+            >
+              مرحله قبلی
+            </button>
+            <button
+              type="button"
+              onClick={confirmHandler}
+              className="px-4 py-2 text-white bg-foreground rounded-md"
+            >
+              تایید
+            </button>
           </div>
         </div>
-        <hr />
-        {checkedItems.map((x, index) => (
-          <div className="flex justify-between" key={index}>
-            <span className="opacity-50 text-sm">{x.title}</span>
-            <span>{x.moneyText}</span>
-          </div>
-        ))}
-      </div>
-      <div className="w-full p-4 flex justify-between">
-        <span className="opacity-50 text-sm">{`در کل ${
-          planeType == PlaneType.monthly ? "(ماهانه)" : "(سالانه)"
-        }`}</span>
-        <span>{total}</span>
-      </div>
-
-      <br />
-      <div className="fixed md:static left-0 bg-white w-full p-4 bottom-0 flex justify-between md:p-0">
-        <button
-          type="button"
-          className="px-4 py-2 text-gray-500 rounded-md"
-          onClick={prevStep}
-        >
-          مرحله قبلی
-        </button>
-        <button
-          type="submit"
-          className="px-4 py-2 text-white bg-foreground rounded-md"
-        >
-          تایید
-        </button>
-      </div>
-    </div>
+      ) : (
+        <div className="flex justify-center items-center flex-col h-full">
+          <IconThankYou />
+          <h2 className="text-3xl font-bold">ممنون از شما</h2>
+          <p className="text-lg text-center">
+            از تأیید اشتراک شما متشکریم! امیدواریم با استفاده از پلتفرم ما لذت
+            ببرید. اگر زمانی نیاز به پشتیبانی داشتید، لطفاً به ما ایمیل بزنید
+            support@loremgaming.com
+          </p>
+        </div>
+      )}
+    </>
   );
 };

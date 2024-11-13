@@ -70,7 +70,7 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   });
 
   return (
-    <div className="text-start">
+    <div>
       <h1 className="font-bold text-3xl">اطلاعات شخصی</h1>
       <span className="opacity-50 text-black text-xs">
         لطفا نام، آدرس ایمیل و شماره تلفن خود را وارد کنید.
