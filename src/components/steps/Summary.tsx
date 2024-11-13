@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { planCards } from "../../constants/formPlan";
-import { PlaneType } from "../../models/utils";
-import { addOnsList } from "../../constants/addOnsList";
-import { ISummaryProps } from "../../models/summaryProps";
-import { IconThankYou } from "../icons/Icon-thank-you";
+import { planCards } from "../../constants/FormPlan";
+import { PlaneType } from "../../models/Utils";
+import { addOnsList } from "../../constants/AddOnsList";
+import { ISummaryProps } from "../../models/SummaryProps";
+import { IconThankYou } from "../../assets/icons/Icon-thank-you";
 
 interface IFinalPlane {
   title: string;

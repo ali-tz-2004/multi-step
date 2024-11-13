@@ -2,7 +2,7 @@ import { AddOns } from "../components/steps/Add-ons";
 import { PersonalInfo } from "../components/steps/Personal-info";
 import { SelectPlan } from "../components/steps/Select-plane";
 import { Summary } from "../components/steps/Summary";
-import { IStep } from "../models/step";
+import { IStep } from "../models/Step";
 
 export const steps: IStep[] = [
   { title: "مرحله 1", description: "درباره شما", children: <PersonalInfo /> },

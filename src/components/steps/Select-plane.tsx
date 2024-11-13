@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ToggleButton from "../Toggle-button";
-import { ISelectPlanProps } from "../../models/selectPlanProps";
-import { planCards } from "../../constants/formPlan";
-import { PlaneType } from "../../models/utils";
+import { ISelectPlanProps } from "../../models/SelectPlanProps";
+import { planCards } from "../../constants/FormPlan";
+import { PlaneType } from "../../models/Utils";
 
 export const SelectPlan: React.FC<ISelectPlanProps> = ({
   nextStep,

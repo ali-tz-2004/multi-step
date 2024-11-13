@@ -1,7 +1,7 @@
-import { IconAdvanced } from "../components/icons/Icon-advanced";
-import { IconArcade } from "../components/icons/Icon-arcade";
-import { IconPro } from "../components/icons/Icon-pro";
-import { IPlanCards } from "../models/selectPlane";
+import { IconAdvanced } from "../assets/icons/Icon-advanced";
+import { IconArcade } from "../assets/icons/Icon-arcade";
+import { IconPro } from "../assets/icons/Icon-pro";
+import { IPlanCards } from "../models/SelectPlane";
 
 export const planCards: IPlanCards[] = [
   {

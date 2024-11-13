@@ -1,4 +1,4 @@
-import { AddOnId, IAddOns } from "../models/addOns";
+import { AddOnId, IAddOns } from "../models/AddOns";
 
 export const addOnsList: IAddOns[] = [
   {

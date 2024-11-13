@@ -1,5 +1,5 @@
 import React from "react";
-import { IStepperProps } from "../../models/step";
+import { IStepperProps } from "../../models/Step";
 
 const Stepper: React.FC<IStepperProps> = ({
   steps,

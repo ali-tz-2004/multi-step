@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { addOnsList } from "../../constants/addOnsList";
-import { IAddOnsProps } from "../../models/addOnsProps";
-import { PlaneType } from "../../models/utils";
+import { addOnsList } from "../../constants/AddOnsList";
+import { IAddOnsProps } from "../../models/AddOnsProps";
+import { PlaneType } from "../../models/Utils";
 
 export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   const planeType = Number(localStorage.getItem("planeType")) as PlaneType;

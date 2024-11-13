@@ -1,5 +1,5 @@
-import { IFormInfo } from "../models/formInfo";
-import { IError } from "../models/error";
+import { IFormInfo } from "../models/FormInfo";
+import { IError } from "../models/Error";
 
 interface IFormInfoParams {
   name: string;
