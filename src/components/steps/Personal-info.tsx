@@ -2,10 +2,12 @@ import { useState } from "react";
 import {
   errorMessageRequired,
   errorMessageValid,
-} from "../../assets/errors/errorMessages";
-import { IError } from "../../models/Error";
-import { getFormInfo } from "../../constants/FormInfo";
-import { IPersonalInfoProps } from "../../models/PersonalInfoProps";
+} from "../../assets/errors/ErrorMessages";
+import {
+  getFormInfo,
+  IError,
+  IPersonalInfoProps,
+} from "../../utils/Personal-info-utils";
 
 export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   const [name, setName] = useState(localStorage.getItem("name") ?? "");

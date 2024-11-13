@@ -1,21 +1,12 @@
 import { useEffect, useState } from "react";
-import { planCards } from "../../constants/FormPlan";
-import { PlaneType } from "../../models/Utils";
-import { addOnsList } from "../../constants/AddOnsList";
-import { ISummaryProps } from "../../models/SummaryProps";
 import { IconThankYou } from "../../assets/icons/Icon-thank-you";
-
-interface IFinalPlane {
-  title: string;
-  moneyText: string;
-  money: number;
-}
-
-interface ICheckedItem {
-  title: string;
-  moneyText: string;
-  money: number;
-}
+import { addOnsList } from "../../utils/Add-ons-utils";
+import { planCards, PlaneType } from "../../utils/Select-plane-utils";
+import {
+  IFinalPlane,
+  ICheckedItem,
+  ISummaryProps,
+} from "../../utils/Summary-utils";
 
 export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
   const planeType = Number(localStorage.getItem("planeType")) as PlaneType;
