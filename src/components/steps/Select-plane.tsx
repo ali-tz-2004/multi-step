@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import ToggleButton from "../Toggle-button";
-import {
-  ISelectPlanProps,
-  planCards,
-  PlaneType,
-} from "../../utils/steps/Select-plane-utils";
 import { StepFooter } from "./Step-footer";
+import { planCards } from "../../data/Select-plane-data";
+import { ISelectPlanProps, PlaneType } from "../../models/Select-plane";
 
 export const SelectPlan: React.FC<ISelectPlanProps> = ({
   nextStep,
@@ -45,8 +42,8 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   return (
     <div>
       <h1 className="font-bold text-3xl">طرح خود را انتخاب کنید</h1>
-      <span className="opacity-50 text-black text-xs">
-        <span className="opacity-50 text-black text-xs">
+      <span className="text-gray-500 text-xs">
+        <span className="text-gray-500 text-xs">
           شما می توانید صورتحساب ماهانه یا سالانه را داشته باشید.
         </span>
       </span>
@@ -77,16 +74,16 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                       {plane.title}
                     </h3>
                     {isToggled == PlaneType.monthly && (
-                      <span className="opacity-50 text-black text-xs">
+                      <span className="text-gray-500 text-xs">
                         {plane.month}
                       </span>
                     )}
                     {isToggled == PlaneType.yearly && (
                       <>
-                        <span className="opacity-50 text-black text-xs block">
+                        <span className="text-gray-500 text-xs block">
                           {plane.year}
                         </span>
-                        <span className="opacity-50 text-black text-xs block">
+                        <span className="text-gray-500 text-xs block">
                           {plane.messageFree}
                         </span>
                       </>

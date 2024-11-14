@@ -1,4 +1,4 @@
-import { IToggleButton, PlaneType } from "../utils/steps/Select-plane-utils";
+import { IToggleButton, PlaneType } from "../models/Select-plane";
 
 const ToggleButton = ({
   isToggled,

@@ -2,13 +2,10 @@ import { useState } from "react";
 import {
   errorMessageRequired,
   errorMessageValid,
-} from "../../assets/errors/ErrorMessages";
-import {
-  getFormInfo,
-  IError,
-  IPersonalInfoProps,
-} from "../../utils/steps/Personal-info-utils";
+} from "../../constants/ErrorMessages";
 import { StepFooter } from "./Step-footer";
+import { IError, IPersonalInfoProps } from "../../models/Personal-info-model";
+import { getFormInfo } from "../../data/Personal-info-data";
 
 export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   const [name, setName] = useState(localStorage.getItem("name") ?? "");
@@ -75,7 +72,7 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   return (
     <div>
       <h1 className="font-bold text-3xl">اطلاعات شخصی</h1>
-      <span className="opacity-50 text-black text-xs">
+      <span className="text-gray-500 text-xs">
         لطفا نام، آدرس ایمیل و شماره تلفن خود را وارد کنید.
       </span>
       <br />

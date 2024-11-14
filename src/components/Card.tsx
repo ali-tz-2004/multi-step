@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Stepper from "./Stepper";
-import { steps } from "../utils/Stepper-utils";
+import { steps } from "../data/Stepper-data";
 
 export const Card = () => {
   const [currentStep, setCurrentStep] = useState(0);

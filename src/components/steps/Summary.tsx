@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { IconThankYou } from "../../assets/icons/Icon-thank-you";
-import { addOnsList } from "../../utils/steps/Add-ons-utils";
-import { planCards, PlaneType } from "../../utils/steps/Select-plane-utils";
+import { StepFooter } from "./Step-footer";
+import { IAddOns } from "../../models/Add-ons-model";
+import { planCards } from "../../data/Select-plane-data";
+import { PlaneType } from "../../models/Select-plane";
 import {
+  ISummaryProps,
   IFinalPlane,
   ICheckedItem,
-  ISummaryProps,
-} from "../../utils/steps/Summary-utils";
-import { StepFooter } from "./Step-footer";
+} from "../../models/Summary-model";
 
 export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
   const planeType = Number(localStorage.getItem("planeType")) as PlaneType;
@@ -39,15 +40,13 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
     }
   };
 
-  const items: number[] = JSON.parse(
+  const items: IAddOns[] = JSON.parse(
     localStorage.getItem("checkedItems") || "[]"
   );
 
-  const itemList = addOnsList.filter((x) => items?.includes(x.id));
-
   const fillCheckedItem = (planeType: PlaneType) => {
     setCheckedItems([
-      ...itemList.map((x) => ({
+      ...items.map((x) => ({
         title: x.label,
         moneyText:
           planeType == PlaneType.monthly
@@ -78,7 +77,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
     fillPanel(planeType);
     fillCheckedItem(planeType);
 
-    const sum = itemList.reduce(
+    const sum = items.reduce(
       (partialSum, a) =>
         partialSum +
         (planeType === PlaneType.monthly ? a.moneyMonth : a.moneyYear),
@@ -88,14 +87,14 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
     const sumTotal = (plane?.money ?? 0) + sum;
 
     setTotal(sumTotal);
-  }, [planeType, itemList, plane]);
+  }, [planeType, items, plane]);
 
   return (
     <>
       {!confirm ? (
         <form onSubmit={confirmHandler}>
           <h1 className="font-bold text-3xl">تمام کردن</h1>
-          <span className="opacity-50 text-black text-sm block">
+          <span className="text-gray-500 text-sm block">
             قبل از تأیید دوباره بررسی کنید همه چیز درست به نظر می رسد.
           </span>
           <br />
@@ -104,7 +103,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
               <div>
                 <h3 className="text-lg">{plane?.title}</h3>
                 <span
-                  className="text-sm underline cursor-pointer opacity-50"
+                  className="text-sm underline cursor-pointer text-gray-500"
                   onClick={changePlaneHandler}
                 >
                   عوض کردن
@@ -120,13 +119,13 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
                 className="flex justify-between py-1 overflow-hidden"
                 key={index}
               >
-                <span className="opacity-50 text-sm">{x.title}</span>
+                <span className="text-gray-500 text-sm">{x.title}</span>
                 <span>{x.moneyText}</span>
               </div>
             ))}
           </div>
           <div className="w-full p-4 flex justify-between">
-            <span className="opacity-50 text-sm">{`در کل ${
+            <span className="text-gray-500 text-sm">{`در کل ${
               planeType == PlaneType.monthly ? "(ماهانه)" : "(سالانه)"
             }`}</span>
             <span className="text-borderInput font-bold text-lg">{`${total}ت/
