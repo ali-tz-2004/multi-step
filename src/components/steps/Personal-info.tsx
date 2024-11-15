@@ -6,11 +6,22 @@ import {
 import { StepFooter } from "./Step-footer";
 import { IError, IPersonalInfoProps } from "../../models/Personal-info-model";
 import { getFormInfo } from "../../data/Personal-info-data";
+import store from "storejs";
+import useStoreState from "../../hooks/useStoreState";
 
 export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
-  const [name, setName] = useState(localStorage.getItem("name") ?? "");
-  const [email, setEmail] = useState(localStorage.getItem("email") ?? "");
-  const [phone, setPhone] = useState(localStorage.getItem("phone") ?? "");
+  const [name, setName] = useStoreState(
+    "name",
+    store.get("name") ? (store.get("name") as string) : ""
+  );
+  const [email, setEmail] = useStoreState(
+    "email",
+    store.get("email") ? (store.get("email") as string) : ""
+  );
+  const [phone, setPhone] = useStoreState(
+    "phone",
+    store.get("phone") ? (store.get("phone") as string) : ""
+  );
 
   const [errors, setErrors] = useState<IError>({
     name: "",
@@ -39,9 +50,6 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validateForm() && nextStep) {
-      localStorage.setItem("name", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("phone", phone);
       nextStep();
     }
   };

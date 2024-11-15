@@ -9,9 +9,10 @@ import {
   IFinalPlane,
   ICheckedItem,
 } from "../../models/Summary-model";
+import store from "storejs";
 
 export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
-  const planeType = Number(localStorage.getItem("planeType")) as PlaneType;
+  const planeType = store.get("planeType") as PlaneType;
 
   const [plane, setPlane] = useState<IFinalPlane>();
   const [checkedItems, setCheckedItems] = useState<ICheckedItem[]>([]);
@@ -19,10 +20,10 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
   const [confirm, setConfirm] = useState(false);
 
   const fillPanel = (planeType: PlaneType) => {
-    const planeId = localStorage.getItem("planeId");
+    const planeId = store.get("planeId") as number;
 
     if (planeId) {
-      let planeCard = planCards.find((x) => x.id == +planeId);
+      let planeCard = planCards.find((x) => x.id == planeId);
       if (planeCard) {
         setPlane({
           title:
@@ -40,9 +41,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
     }
   };
 
-  const items: IAddOns[] = JSON.parse(
-    localStorage.getItem("checkedItems") || "[]"
-  );
+  const items: IAddOns[] = (store.get("checkedItems") as IAddOns[]) || [];
 
   const fillCheckedItem = (planeType: PlaneType) => {
     setCheckedItems([

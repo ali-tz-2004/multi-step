@@ -5,16 +5,18 @@ import { getAddOns } from "../../services/Add-ons-service";
 import { Alert } from "../Alert";
 import { AxiosError } from "axios";
 import { PlaneType } from "../../models/Select-plane";
+import useStoreState from "../../hooks/useStoreState";
+import store from "storejs";
 
 export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
-  const planeType = Number(localStorage.getItem("planeType")) as PlaneType;
+  const planeType = store.get("planeType") as PlaneType;
   const [addOnsList, setAddOnsList] = useState<IAddOns[]>([]);
   const [error, setError] = useState<string>();
 
-  const [checkedItems, setCheckedItems] = useState<IAddOns[]>(() => {
-    const storedItems = localStorage.getItem("checkedItems");
-    return storedItems ? JSON.parse(storedItems) : [];
-  });
+  const [checkedItems, setCheckedItems] = useStoreState<IAddOns[]>(
+    "checkedItems",
+    []
+  );
 
   const handleCheckboxChange = (addOn: IAddOns) => {
     setCheckedItems((prev) => {
@@ -27,7 +29,6 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
 
   const handleSubmit = () => {
     if (nextStep) {
-      localStorage.setItem("checkedItems", JSON.stringify(checkedItems));
       nextStep();
     }
   };
@@ -42,6 +43,13 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
       setError(error.message);
     }
   };
+
+  useEffect(() => {
+    const storedItems = store.get("checkedItems") as IAddOns[] | undefined;
+    if (storedItems) {
+      setCheckedItems(storedItems);
+    }
+  }, [setCheckedItems]);
 
   useEffect(() => {
     loadAddOns();

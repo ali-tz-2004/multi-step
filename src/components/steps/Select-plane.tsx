@@ -3,14 +3,19 @@ import ToggleButton from "../Toggle-button";
 import { StepFooter } from "./Step-footer";
 import { planCards } from "../../data/Select-plane-data";
 import { ISelectPlanProps, PlaneType } from "../../models/Select-plane";
+import useStoreState from "../../hooks/useStoreState";
+import store from "storejs";
 
 export const SelectPlan: React.FC<ISelectPlanProps> = ({
   nextStep,
   prevStep,
 }) => {
-  const [isToggled, setIsToggled] = useState<PlaneType>(PlaneType.monthly);
+  const [isToggled, setIsToggled] = useStoreState<PlaneType>(
+    "planeType",
+    PlaneType.monthly
+  );
 
-  const [planeId, setPlaneId] = useState(0);
+  const [planeId, setPlaneId] = useStoreState("planeId", 0);
 
   const handleToggle = () => {
     setIsToggled(
@@ -21,8 +26,6 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (nextStep) {
-      localStorage.setItem("planeId", planeId.toString());
-      localStorage.setItem("planeType", isToggled.toString());
       nextStep();
     }
   };
@@ -32,11 +35,11 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   };
 
   useEffect(() => {
-    const storedPlaneId = localStorage.getItem("planeId");
+    const storedPlaneId = store.get("planeId") as number;
     setPlaneId(storedPlaneId ? +storedPlaneId : 0);
 
-    const storedPlaneType = localStorage.getItem("planeType");
-    setIsToggled(storedPlaneType ? +storedPlaneType : PlaneType.monthly);
+    const storedPlaneType = store.get("planeType") as PlaneType;
+    setIsToggled(storedPlaneType ? storedPlaneType : PlaneType.monthly);
   }, []);
 
   return (
