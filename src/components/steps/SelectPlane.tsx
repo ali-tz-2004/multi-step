@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ToggleButton from "../Toggle-button";
-import { StepFooter } from "./Step-footer";
-import { planCards } from "../../data/Select-plane-data";
+import { StepFooter } from "./StepFooter";
+import { planCards } from "../../data/SelectPlaneData";
 import useStoreState from "../../hooks/useStoreState";
 import store from "storejs";
 import { PlaneType } from "../../types/PlaneType";
@@ -32,6 +32,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
     event.preventDefault();
     if (nextStep) {
       nextStep();
+      store.set("step", 3);
     }
   };
 

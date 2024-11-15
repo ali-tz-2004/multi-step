@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Stepper from "./Stepper";
-import { steps } from "../data/Stepper-data";
+import { steps } from "../data/StepperData";
 
 export const Card = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -17,12 +17,17 @@ export const Card = () => {
     }
   };
 
+  const goToStep = (index: number) => {
+    setCurrentStep(index);
+  };
+
   return (
     <Stepper
       steps={steps}
       currentStep={currentStep}
       nextStep={nextStep}
       prevStep={prevStep}
+      goToStep={goToStep}
     />
   );
 };

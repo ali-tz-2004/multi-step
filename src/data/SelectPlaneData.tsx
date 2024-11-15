@@ -1,6 +1,6 @@
-import { IconAdvanced } from "../assets/icons/Icon-advanced";
-import { IconArcade } from "../assets/icons/Icon-arcade";
-import { IconPro } from "../assets/icons/Icon-pro";
+import { IconAdvanced } from "../assets/icons/IconAdvanced";
+import { IconArcade } from "../assets/icons/IconArcade";
+import { IconPro } from "../assets/icons/IconPro";
 
 interface IPlanCards {
   id: number;

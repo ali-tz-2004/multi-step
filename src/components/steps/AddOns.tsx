@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { StepFooter } from "./Step-footer";
-import { getAddOns } from "../../services/Add-ons-service";
+import { StepFooter } from "./StepFooter";
+import { getAddOns } from "../../services/AddOnsService";
 import { Alert } from "../Alert";
 import { AxiosError } from "axios";
 import useStoreState from "../../hooks/useStoreState";
@@ -35,6 +35,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   const handleSubmit = () => {
     if (nextStep) {
       nextStep();
+      store.set("step", 4);
     }
   };
 

@@ -10,7 +10,8 @@ module.exports = {
         foreground: "var(--foreground)",
         "border-input": "#565096",
         "light-gray": "#A7A6AB",
-        "hover-btn": "#174A8B"
+        "hover-btn": "#174A8B",
+        "secondary": "#F9818E"
       },
       backgroundColor:{
         "light-gray": "#F8F9FE",

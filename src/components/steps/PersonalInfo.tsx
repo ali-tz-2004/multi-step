@@ -3,8 +3,8 @@ import {
   errorMessageRequired,
   errorMessageValid,
 } from "../../constants/ErrorMessages";
-import { StepFooter } from "./Step-footer";
-import { getFormInfo } from "../../data/Personal-info-data";
+import { StepFooter } from "./StepFooter";
+import { getFormInfo } from "../../data/PersonalInfoData";
 import store from "storejs";
 import useStoreState from "../../hooks/useStoreState";
 import { ErrorMessage } from "../../types/ErrorMessage";
@@ -55,6 +55,7 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
     event.preventDefault();
     if (validateForm() && nextStep) {
       nextStep();
+      store.set("step", 2);
     }
   };
 
