@@ -13,21 +13,13 @@
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: "BNAZANIN";
-  src: local("BNAZANIN"), url("./assets/fonts/BNAZANIN.TTF") format("TTF");
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "BNAZANIN", sans-serif;
+  font-family: Vazirmatn, sans-serif;
   direction: rtl;
 }
 
 input {
   outline: none;
-  font-family: sans-serif;
 }
