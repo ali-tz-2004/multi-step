@@ -9,8 +9,8 @@ const ToggleButton = ({
   return (
     <div dir="ltr" className="flex items-center justify-center">
       <h3
-        className={`font-bold text-lg p-2 ${
-          isToggled == PlaneType.monthly ? "" : "opacity-50"
+        className={`font-bold p-2 ${
+          isToggled == PlaneType.monthly ? "" : "text-light-gray"
         }`}
       >
         {label1}
@@ -27,8 +27,8 @@ const ToggleButton = ({
         ></div>
       </button>
       <h3
-        className={`font-bold text-lg p-2 ${
-          isToggled == PlaneType.yearly ? "" : "opacity-50"
+        className={`font-bold p-2 ${
+          isToggled == PlaneType.yearly ? "" : "text-light-gray"
         }`}
       >
         {label2}

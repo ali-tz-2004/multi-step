@@ -8,8 +8,12 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        borderInput: "#565096",
-        lightGray: "#F8F9FE"
+        "border-input": "#565096",
+        "light-gray": "#A7A6AB",
+        "hover-btn": "#174A8B"
+      },
+      backgroundColor:{
+        "light-gray": "#F8F9FE",
       },
       width: {
         '50': '50rem',

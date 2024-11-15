@@ -12,7 +12,7 @@ export const StepFooter = ({ prevStep, step }: TfootStepperProps) => {
     >
       <button
         type="button"
-        className={`px-4 py-2 text-gray-500 rounded-md ${
+        className={`px-4 py-2 text-light-gray rounded-md text-sm hover:text-foreground hover:font-bold ${
           step === 1 ? "hidden" : ""
         }`}
         onClick={prevStep}
@@ -21,7 +21,7 @@ export const StepFooter = ({ prevStep, step }: TfootStepperProps) => {
       </button>
       <button
         type="submit"
-        className="px-4 py-2 text-white bg-foreground rounded-md"
+        className="px-4 py-2 text-white bg-foreground rounded-md text-sm hover:bg-hoverBtn"
       >
         {step == 4 ? "تایید" : "مرحله بعدی"}
       </button>

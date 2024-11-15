@@ -93,41 +93,40 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
       {!confirm ? (
         <form onSubmit={confirmHandler}>
           <h1 className="font-bold text-3xl">تمام کردن</h1>
-          <span className="text-gray-500 text-sm block">
+          <p className="text-light-gray text-xs block pb-8">
             قبل از تأیید دوباره بررسی کنید همه چیز درست به نظر می رسد.
-          </span>
-          <br />
-          <div className="w-full bg-lightGray p-4 rounded-lg">
+          </p>
+          <div className="w-full bg-light-gray p-4 rounded-lg">
             <div className="flex justify-between items-center pb-4">
               <div>
-                <h3 className="text-lg">{plane?.title}</h3>
+                <h3 className="text-sm font-bold">{plane?.title}</h3>
                 <span
-                  className="text-sm underline cursor-pointer text-gray-500"
+                  className="text-xs underline cursor-pointer text-light-gray"
                   onClick={changePlaneHandler}
                 >
                   عوض کردن
                 </span>
               </div>
               <div>
-                <span className="font-bold text-sm">{plane?.moneyText}</span>
+                <span className="font-bold text-xs">{plane?.moneyText}</span>
               </div>
             </div>
             <hr />
             {checkedItems.map((x, index) => (
               <div
-                className="flex justify-between py-1 overflow-hidden"
+                className="flex justify-between py-1 mt-2 overflow-hidden"
                 key={index}
               >
-                <span className="text-gray-500 text-sm">{x.title}</span>
-                <span>{x.moneyText}</span>
+                <span className="text-light-gray text-xs">{x.title}</span>
+                <span className="text-xs">{x.moneyText}</span>
               </div>
             ))}
           </div>
           <div className="w-full p-4 flex justify-between">
-            <span className="text-gray-500 text-sm">{`در کل ${
+            <span className="text-light-gray text-xs">{`در کل ${
               planeType == PlaneType.monthly ? "(ماهانه)" : "(سالانه)"
             }`}</span>
-            <span className="text-borderInput font-bold text-lg">{`${total}ت/
+            <span className="text-border-input font-bold text-lg">{`${total}ت/
          ${planeType == PlaneType.monthly ? "ماهانه" : "سالانه"}
         `}</span>
           </div>
@@ -137,8 +136,8 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
       ) : (
         <div className="flex justify-center items-center flex-col h-full py-10 md:py-0">
           <IconThankYou />
-          <h2 className="text-3xl font-bold">ممنون از شما</h2>
-          <p className="text-lg text-center">
+          <h2 className="text-2xl font-bold pt-8">ممنون از شما</h2>
+          <p className="text-sm text-center text-light-gray">
             از تأیید اشتراک شما متشکریم! امیدواریم با استفاده از پلتفرم ما لذت
             ببرید. اگر زمانی نیاز به پشتیبانی داشتید، لطفاً به ما ایمیل بزنید
             support@loremgaming.com

@@ -80,19 +80,14 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
   return (
     <div>
       <h1 className="font-bold text-3xl">اطلاعات شخصی</h1>
-      <span className="text-gray-500 text-xs">
+      <p className="text-light-gray text-xs pb-8">
         لطفا نام، آدرس ایمیل و شماره تلفن خود را وارد کنید.
-      </span>
-      <br />
-      <br />
-
+      </p>
       <form onSubmit={handleSubmit}>
         {formInfo.map((field, index) => (
           <div key={index} className="mb-4">
             <div className="flex justify-between">
-              <label className="block mb-2 text-sm font-medium">
-                {field.labelName}
-              </label>
+              <label className="block mb-2 text-sm">{field.labelName}</label>
               {field.errorMessage && (
                 <span className="text-red-500 text-xs font-bold">
                   {field.errorMessage}

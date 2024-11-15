@@ -45,13 +45,9 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   return (
     <div>
       <h1 className="font-bold text-3xl">طرح خود را انتخاب کنید</h1>
-      <span className="text-gray-500 text-xs">
-        <span className="text-gray-500 text-xs">
-          شما می توانید صورتحساب ماهانه یا سالانه را داشته باشید.
-        </span>
-      </span>
-      <br />
-      <br />
+      <p className="text-light-gray text-xs pb-8">
+        شما می توانید صورتحساب ماهانه یا سالانه را داشته باشید.
+      </p>
       <form onSubmit={handleSubmit}>
         <div className="flex justify-between w-full gap-4 flex-col md:flex-row">
           {planCards.map((plane, index) => (
@@ -68,25 +64,25 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
               />
               <label
                 htmlFor={plane.idTag}
-                className="block p-4 border rounded-lg cursor-pointer peer-checked:bg-background peer-checked:border-borderInput"
+                className="block p-4 border rounded-lg cursor-pointer peer-checked:bg-background peer-checked:border-border-input"
               >
                 <div className="flex items-start md:block">
                   {plane.icon}
                   <div>
-                    <h3 className="font-bold text-lg md:pt-6 pr-2 md:pr-0">
+                    <h3 className="font-bold text-sm md:pt-6 pr-2 md:pr-0">
                       {plane.title}
                     </h3>
                     {isToggled == PlaneType.monthly && (
-                      <span className="text-gray-500 text-xs">
+                      <span className="text-light-gray text-xs">
                         {plane.month}
                       </span>
                     )}
                     {isToggled == PlaneType.yearly && (
                       <>
-                        <span className="text-gray-500 text-xs block">
+                        <span className="text-light-gray text-xs block">
                           {plane.year}
                         </span>
-                        <span className="text-gray-500 text-xs block">
+                        <span className="text-light-gray text-xs block">
                           {plane.messageFree}
                         </span>
                       </>

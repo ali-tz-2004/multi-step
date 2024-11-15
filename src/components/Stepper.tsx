@@ -19,14 +19,11 @@ const Stepper: React.FC<IStepperProps> = ({
                 index === currentStep
                   ? "text-black bg-blue-300"
                   : "border text-white"
-              } flex items-center justify-center`}
+              } flex items-center justify-center text-xs font-bold`}
             >
               {index + 1}
             </div>
             <div className="flex flex-col md:pr-4 text-start">
-              <span className="text-white opacity-50 text-xs hidden md:block">
-                {step.title}
-              </span>
               <span className="text-white font-semibold text-xs hidden md:block">
                 {step.description}
               </span>

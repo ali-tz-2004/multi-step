@@ -58,7 +58,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   return (
     <div>
       <h1 className="font-bold text-3xl">افزودنی ها را انتخاب کنید</h1>
-      <p className="text-gray-500 text-sm pb-4">
+      <p className="text-light-gray text-xs pb-8">
         افزونه ها به بهبود تجربه بازی شما کمک می کنند.
       </p>
       <Alert
@@ -74,7 +74,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
             htmlFor={addOn.name}
             className={`flex items-center h-full p-2 mb-2 rounded-lg border cursor-pointer select-none ${
               checkedItems.some((item) => item.id === addOn.id)
-                ? "bg-background border-borderInput"
+                ? "bg-background border-border-input"
                 : ""
             }`}
           >
@@ -88,13 +88,13 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
             />
             <div className="flex justify-between items-center w-full">
               <div className="pr-2">
-                <h3 className="font-bold text-lg">{addOn.label}</h3>
-                <span className="text-gray-500 text-sm">
+                <h3 className="font-bold text-sm">{addOn.label}</h3>
+                <span className="text-light-gray text-xs">
                   {addOn.description}
                 </span>
               </div>
               <div>
-                <span className="text-borderInput font-bold text-sm">
+                <span className="text-border-input font-bold text-xs">
                   {planeType === PlaneType.yearly
                     ? `${addOn.year}/سالانه`
                     : `${addOn.month}/ماهانه`}
