@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
 import { StepFooter } from "./Step-footer";
-import { IAddOns, IAddOnsProps } from "../../models/Add-ons-model";
 import { getAddOns } from "../../services/Add-ons-service";
 import { Alert } from "../Alert";
 import { AxiosError } from "axios";
-import { PlaneType } from "../../models/Select-plane";
 import useStoreState from "../../hooks/useStoreState";
 import store from "storejs";
+import { PlaneType } from "../../types/PlaneType";
+import { AddOnsType } from "../../types/AddOnsType";
+
+interface IAddOnsProps {
+  nextStep?: () => void;
+  prevStep?: () => void;
+}
 
 export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   const planeType = store.get("planeType") as PlaneType;
-  const [addOnsList, setAddOnsList] = useState<IAddOns[]>([]);
+  const [addOnsList, setAddOnsList] = useState<AddOnsType[]>([]);
   const [error, setError] = useState<string>();
 
-  const [checkedItems, setCheckedItems] = useStoreState<IAddOns[]>(
+  const [checkedItems, setCheckedItems] = useStoreState<AddOnsType[]>(
     "checkedItems",
     []
   );
 
-  const handleCheckboxChange = (addOn: IAddOns) => {
+  const handleCheckboxChange = (addOn: AddOnsType) => {
     setCheckedItems((prev) => {
       const exists = prev.find((item) => item.id === addOn.id);
       return exists
@@ -45,7 +50,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   };
 
   useEffect(() => {
-    const storedItems = store.get("checkedItems") as IAddOns[] | undefined;
+    const storedItems = store.get("checkedItems") as AddOnsType[] | undefined;
     if (storedItems) {
       setCheckedItems(storedItems);
     }

@@ -1,7 +1,19 @@
 import { IconAdvanced } from "../assets/icons/Icon-advanced";
 import { IconArcade } from "../assets/icons/Icon-arcade";
 import { IconPro } from "../assets/icons/Icon-pro";
-import { IPlanCards } from "../models/Select-plane";
+
+interface IPlanCards {
+  id: number;
+  idTag: string;
+  icon: React.ReactNode;
+  title: string;
+  month: string;
+  year: string;
+  messageFree?: string;
+  value: string;
+  moneyMonth: number;
+  moneyYear: number;
+}
 
 export const planCards: IPlanCards[] = [
   {

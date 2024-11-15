@@ -1,11 +1,18 @@
-import { IToggleButton, PlaneType } from "../models/Select-plane";
+import { PlaneType } from "../types/PlaneType";
+
+interface ToggleButtonProps {
+  isToggled: PlaneType;
+  onToggle: () => void;
+  label1?: string;
+  label2?: string;
+}
 
 const ToggleButton = ({
   isToggled,
   onToggle,
   label1,
   label2,
-}: IToggleButton) => {
+}: ToggleButtonProps) => {
   return (
     <div dir="ltr" className="flex items-center justify-center">
       <h3

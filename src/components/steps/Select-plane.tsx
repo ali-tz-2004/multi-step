@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import ToggleButton from "../Toggle-button";
 import { StepFooter } from "./Step-footer";
 import { planCards } from "../../data/Select-plane-data";
-import { ISelectPlanProps, PlaneType } from "../../models/Select-plane";
 import useStoreState from "../../hooks/useStoreState";
 import store from "storejs";
+import { PlaneType } from "../../types/PlaneType";
+
+interface ISelectPlanProps {
+  nextStep?: () => void;
+  prevStep?: () => void;
+}
 
 export const SelectPlan: React.FC<ISelectPlanProps> = ({
   nextStep,

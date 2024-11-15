@@ -4,12 +4,16 @@ import {
   errorMessageValid,
 } from "../../constants/ErrorMessages";
 import { StepFooter } from "./Step-footer";
-import { IError, IPersonalInfoProps } from "../../models/Personal-info-model";
 import { getFormInfo } from "../../data/Personal-info-data";
 import store from "storejs";
 import useStoreState from "../../hooks/useStoreState";
+import { ErrorMessage } from "../../types/ErrorMessage";
 
-export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
+interface PersonalInfoProps {
+  nextStep?: () => void;
+}
+
+export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
   const [name, setName] = useStoreState(
     "name",
     store.get("name") ? (store.get("name") as string) : ""
@@ -23,13 +27,13 @@ export const PersonalInfo: React.FC<IPersonalInfoProps> = ({ nextStep }) => {
     store.get("phone") ? (store.get("phone") as string) : ""
   );
 
-  const [errors, setErrors] = useState<IError>({
+  const [errors, setErrors] = useState<ErrorMessage>({
     name: "",
     email: "",
     phone: "",
   });
 
-  const newErrors: IError = { name: "", email: "", phone: "" };
+  const newErrors: ErrorMessage = { name: "", email: "", phone: "" };
 
   const validateForm = () => {
     if (!name) newErrors.name = errorMessageRequired();

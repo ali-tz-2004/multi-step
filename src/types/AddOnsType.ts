@@ -1,21 +1,16 @@
-export enum AddOnId {
+export enum AddOnsName {
   OnlineService = "online-service",
   LargeStorage = "large-storage",
   CustomProfile = "custom-profile",
 }
 
-export interface IAddOns {
+export interface AddOnsType {
   id: number;
-  name: AddOnId;
+  name: AddOnsName;
   label: string;
   description: string;
   month: string;
   year: string;
   moneyMonth: number;
   moneyYear: number;
-}
-
-export interface IAddOnsProps {
-  nextStep?: () => void;
-  prevStep?: () => void;
 }

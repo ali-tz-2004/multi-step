@@ -1,21 +1,32 @@
 import { useEffect, useState } from "react";
 import { IconThankYou } from "../../assets/icons/Icon-thank-you";
 import { StepFooter } from "./Step-footer";
-import { IAddOns } from "../../models/Add-ons-model";
 import { planCards } from "../../data/Select-plane-data";
-import { PlaneType } from "../../models/Select-plane";
-import {
-  ISummaryProps,
-  IFinalPlane,
-  ICheckedItem,
-} from "../../models/Summary-model";
 import store from "storejs";
+import { PlaneType } from "../../types/PlaneType";
+import { AddOnsType } from "../../types/AddOnsType";
 
-export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
+interface FinalPlaneType {
+  title: string;
+  moneyText: string;
+  money: number;
+}
+
+interface CheckedItemType {
+  title: string;
+  moneyText: string;
+  money: number;
+}
+
+interface SummaryProps {
+  prevStep?: () => void;
+}
+
+export const Summary: React.FC<SummaryProps> = ({ prevStep }) => {
   const planeType = store.get("planeType") as PlaneType;
 
-  const [plane, setPlane] = useState<IFinalPlane>();
-  const [checkedItems, setCheckedItems] = useState<ICheckedItem[]>([]);
+  const [plane, setPlane] = useState<FinalPlaneType>();
+  const [checkedItems, setCheckedItems] = useState<CheckedItemType[]>([]);
   const [total, setTotal] = useState<number>();
   const [confirm, setConfirm] = useState(false);
 
@@ -41,7 +52,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
     }
   };
 
-  const items: IAddOns[] = (store.get("checkedItems") as IAddOns[]) || [];
+  const items: AddOnsType[] = (store.get("checkedItems") as AddOnsType[]) || [];
 
   const fillCheckedItem = (planeType: PlaneType) => {
     setCheckedItems([
@@ -58,6 +69,7 @@ export const Summary: React.FC<ISummaryProps> = ({ prevStep }) => {
 
   const confirmHandler = () => {
     setConfirm(true);
+    store.clear();
   };
 
   const stepBackHandler = (stepsBack = 2) => {
