@@ -32,7 +32,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
     });
   };
 
-  const handleSubmit = () => {
+  const submit = () => {
     if (nextStep) {
       nextStep();
       const step = store.get("step");
@@ -75,7 +75,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
         message={error}
         onClose={() => setError(undefined)}
       />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submit}>
         {addOnsList.map((addOn) => (
           <label
             key={addOn.name}

@@ -3,8 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #eef5ff;
-  --foreground: #052859;
+  --background: 238, 245, 255;
+  --foreground: 5, 40, 89;
+  --card: 255, 255, 255;
+  --btn-next-step: 5, 40, 89;
+  --input: 255, 255, 255;
+  --input-color: 0, 0, 0;
+  --toggle-color: 255, 255, 255;
+  --card-summary: 248, 249, 254;
+  --btn-next-step-hover: 23, 74, 139;
+  --slider-desktop: url("./assets/images/bg-sidebar-desktop.svg");
+  --slider-mobile: url("./assets/images/bg-sidebar-mobile.svg");
 }
 
 * {
@@ -14,12 +23,38 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Vazirmatn, sans-serif;
   direction: rtl;
 }
 
 input {
   outline: none;
+}
+
+.light {
+  --background: 238, 245, 255;
+  --foreground: 5, 40, 89;
+  --card: 255, 255, 255;
+  --btn-next-step: 5, 40, 89;
+  --input: 255, 255, 255;
+  --input-color: 0, 0, 0;
+  --toggle-color: 255, 255, 255;
+  --card-summary: 248, 249, 254;
+  --btn-next-step-hover: 23, 74, 139;
+  --slider-desktop: url("./assets/images/bg-sidebar-desktop.svg");
+  --slider-mobile: url("./assets/images/bg-sidebar-mobile.svg");
+}
+
+.dark {
+  --background: 18, 18, 18;
+  --foreground: 255, 255, 255;
+  --card: 31, 31, 31;
+  --btn-next-step: 56, 56, 56;
+  --input: 18, 18, 18;
+  --input-color: 255, 255, 255;
+  --toggle-color: 18, 18, 18;
+  --card-summary: 56, 56, 56;
+  --btn-next-step-hover: 18, 18, 18;
+  --slider-desktop: url("./assets/images/bg-sidebar-desktop-dark.svg");
+  --slider-mobile: url("./assets/images/bg-sidebar-mobile-dark.svg");
 }

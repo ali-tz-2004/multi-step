@@ -51,7 +51,7 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
     return !newErrors.name && !newErrors.email && !newErrors.phone;
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validateForm() && nextStep) {
       nextStep();
@@ -90,7 +90,7 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
       <p className="text-light-gray text-xs pb-8">
         لطفا نام، آدرس ایمیل و شماره تلفن خود را وارد کنید.
       </p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submit}>
         {formInfo.map((field, index) => (
           <div key={index} className="mb-4">
             <div className="flex justify-between">
@@ -103,7 +103,7 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
             </div>
             <input
               type="text"
-              className={`border border-gray-300 text-sm rounded-lg block w-full p-2.5 cursor-pointer ${
+              className={`border border-gray-300 text-sm rounded-lg block w-full p-2.5 cursor-pointer text-input-color bg-input ${
                 field.errorMessage
                   ? "border-red-500"
                   : "focus:border-foreground"

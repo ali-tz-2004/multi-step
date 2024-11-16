@@ -6,7 +6,7 @@ export interface TfootStepperProps {
 export const StepFooter = ({ prevStep, step }: TfootStepperProps) => {
   return (
     <div
-      className={`fixed md:absolute left-0 bg-white w-full p-4 bottom-0 md:p-0 ${
+      className={`fixed md:absolute left-0 bg-card w-full p-4 bottom-0 md:p-0 ${
         step === 1 ? "text-end" : "flex justify-between"
       }`}
     >
@@ -21,7 +21,7 @@ export const StepFooter = ({ prevStep, step }: TfootStepperProps) => {
       </button>
       <button
         type="submit"
-        className="px-4 py-2 text-white bg-foreground rounded-md text-sm hover:bg-hover-btn"
+        className="bg-btn-next-step px-4 py-2 text-white rounded-md text-sm hover:bg-btn-next-step-hover"
       >
         {step == 4 ? "تایید" : "مرحله بعدی"}
       </button>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ToggleButton from "../Toggle-button";
 import { StepFooter } from "./StepFooter";
 import { planCards } from "../../data/SelectPlaneData";
@@ -15,20 +15,22 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   nextStep,
   prevStep,
 }) => {
-  const [isToggled, setIsToggled] = useStoreState<PlaneType>(
+  const [isToggled, setIsToggled] = useState<boolean>(true);
+
+  const [planeType, setPlaneType] = useStoreState<PlaneType>(
     "planeType",
     PlaneType.monthly
   );
 
   const [planeId, setPlaneId] = useStoreState("planeId", 0);
 
-  const handleToggle = () => {
-    setIsToggled(
-      isToggled == PlaneType.monthly ? PlaneType.yearly : PlaneType.monthly
-    );
+  const toggleHandle = () => {
+    const nextIsToggled = !isToggled;
+    setIsToggled(nextIsToggled);
+    setPlaneType(nextIsToggled ? PlaneType.monthly : PlaneType.yearly);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (nextStep) {
       nextStep();
@@ -47,7 +49,9 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
     setPlaneId(storedPlaneId ? +storedPlaneId : 0);
 
     const storedPlaneType = store.get("planeType") as PlaneType;
-    setIsToggled(storedPlaneType ? storedPlaneType : PlaneType.monthly);
+    setPlaneType(storedPlaneType || PlaneType.monthly);
+
+    setIsToggled(storedPlaneType === PlaneType.monthly);
   }, []);
 
   return (
@@ -56,7 +60,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
       <p className="text-light-gray text-xs pb-8">
         شما می توانید صورتحساب ماهانه یا سالانه را داشته باشید.
       </p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submit}>
         <div className="flex justify-between w-full gap-4 flex-col md:flex-row">
           {planCards.map((plane, index) => (
             <div className="flex-1" key={index}>
@@ -80,12 +84,12 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                     <h3 className="font-bold text-sm md:pt-6 pr-2 md:pr-0">
                       {plane.title}
                     </h3>
-                    {isToggled == PlaneType.monthly && (
+                    {planeType == PlaneType.monthly && (
                       <span className="text-light-gray text-xs">
                         {plane.month}
                       </span>
                     )}
-                    {isToggled == PlaneType.yearly && (
+                    {planeType == PlaneType.yearly && (
                       <>
                         <span className="text-light-gray text-xs block">
                           {plane.year}
@@ -105,7 +109,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
         <div className="flex">
           <div className="bg-background w-full h-10 rounded-lg">
             <ToggleButton
-              onToggle={handleToggle}
+              onToggle={toggleHandle}
               isToggled={isToggled}
               label1="ماهانه"
               label2="سالانه"

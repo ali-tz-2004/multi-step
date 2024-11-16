@@ -107,7 +107,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
       <p className="text-light-gray text-xs block pb-8">
         قبل از تأیید دوباره بررسی کنید همه چیز درست به نظر می رسد.
       </p>
-      <div className="w-full bg-light-gray p-4 rounded-lg">
+      <div className="w-full bg-card-summary p-4 rounded-lg">
         <div className="flex justify-between items-center pb-4">
           <div>
             <h3 className="text-sm font-bold">{plane?.title}</h3>

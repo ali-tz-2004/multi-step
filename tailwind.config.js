@@ -6,15 +6,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "rgb(var(--background))",
+        foreground: "rgb(var(--foreground))",
         "border-input": "#565096",
         "light-gray": "#A7A6AB",
-        "hover-btn": "#174A8B",
-        "secondary": "#F9818E"
-      },
-      backgroundColor:{
-        "light-gray": "#F8F9FE",
+        "btn-next-step-hover": "rgb(var(--btn-next-step-hover))",
+        "secondary": "#F9818E",
+        "card": "rgb(var(--card))",
+        "btn-next-step": "rgb(var(--btn-next-step))",
+        "input": "rgb(var(--input))",
+        "input-color": "rgb(var(--input-color))",
+        "toggle-color": "rgb(var(--toggle-color))",
+        "card-summary": "rgb(var(--card-summary))",
       },
       width: {
         '50': '50rem',
@@ -24,8 +27,8 @@ module.exports = {
         '30': '30rem',
       },
       backgroundImage: {
-        "slider-desktop": "url('./assets/images/bg-sidebar-desktop.svg')",
-        "slider-mobile": "url('./assets/images/bg-sidebar-mobile.svg')",
+        "slider-desktop": "var(--slider-desktop)",
+        "slider-mobile": "var(--slider-mobile)",
       },
       animation: {
         fadeIn: "fadeIn 0.2s ease-in-out forwards",
