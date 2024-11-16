@@ -55,6 +55,8 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
     event.preventDefault();
     if (validateForm() && nextStep) {
       nextStep();
+      const step = store.get("step");
+      if (step > 2) return;
       store.set("step", 2);
     }
   };

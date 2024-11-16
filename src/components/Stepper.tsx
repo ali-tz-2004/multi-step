@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StepType } from "../types/StepType";
 import store from "storejs";
 import { IconTick } from "../assets/icons/IconTIck";
@@ -19,10 +19,15 @@ const Stepper: React.FC<IStepperProps> = ({
   goToStep,
 }) => {
   const stepIndex = store.get("step") as number;
+  const [isFading, setIsFading] = useState(false);
 
   const currentStepHandler = (index: number) => {
-    if (index < stepIndex && stepIndex < 4) {
-      goToStep(index);
+    if (index < stepIndex && stepIndex <= 4) {
+      setIsFading(true);
+      setTimeout(() => {
+        goToStep(index);
+        setIsFading(false);
+      }, 500);
     }
   };
 
@@ -34,8 +39,12 @@ const Stepper: React.FC<IStepperProps> = ({
           .map((step, index) => (
             <div key={index} className="text-center flex items-center p-4">
               <div
-                className={`w-8 h-8 rounded-full text-white ${
-                  index === currentStep ? "bg-blue-300" : "border"
+                className={`w-8 h-8 rounded-full text-white transition-all duration-500 ${
+                  index === currentStep
+                    ? "bg-blue-500 animate-fadeIn"
+                    : isFading && index === currentStep
+                    ? "animate-fadeOut"
+                    : "border"
                 } flex items-center justify-center text-xs font-bold ${
                   index < stepIndex ? "cursor-pointer bg-green-500" : ""
                 } `}

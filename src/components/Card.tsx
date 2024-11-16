@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Stepper from "./Stepper";
 import { steps } from "../data/StepperData";
+import store from "storejs";
 
 export const Card = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -20,6 +21,10 @@ export const Card = () => {
   const goToStep = (index: number) => {
     setCurrentStep(index);
   };
+
+  useEffect(() => {
+    store.set("step", 1);
+  }, []);
 
   return (
     <Stepper

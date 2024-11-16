@@ -35,6 +35,8 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   const handleSubmit = () => {
     if (nextStep) {
       nextStep();
+      const step = store.get("step");
+      if (step > 4) return;
       store.set("step", 4);
     }
   };

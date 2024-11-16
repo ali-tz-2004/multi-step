@@ -32,6 +32,8 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
     event.preventDefault();
     if (nextStep) {
       nextStep();
+      const step = store.get("step");
+      if (step > 3) return;
       store.set("step", 3);
     }
   };
