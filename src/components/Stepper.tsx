@@ -40,18 +40,19 @@ const Stepper: React.FC<IStepperProps> = ({
             <div key={index} className="text-center flex items-center p-4">
               <div
                 className={`w-8 h-8 rounded-full text-white transition-all duration-500 ${
-                  index === currentStep
-                    ? "bg-blue-600 animate-fadeIn"
-                    : isFading && index === currentStep
+                  index === currentStep ? "bg-blue-500" : ""
+                } ${
+                  isFading && index === currentStep
                     ? "animate-fadeOut"
-                    : "border"
-                } flex items-center justify-center text-xs font-bold ${
-                  index < stepIndex ? "cursor-pointer bg-green-500" : ""
-                } `}
+                    : "animate-fadeIn"
+                } ${
+                  index < stepIndex ? "cursor-pointer bg-green-500" : "border"
+                } flex items-center justify-center text-xs font-bold`}
                 onClick={() => currentStepHandler(index)}
               >
                 {index < stepIndex - 1 ? <IconTick /> : index + 1}
               </div>
+
               <div className="flex flex-col md:pr-4 text-start">
                 <span className="text-white font-semibold text-xs hidden md:block">
                   {step.description}
