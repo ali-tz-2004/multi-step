@@ -1,5 +1,3 @@
-import { PlaneType } from "../types/PlaneType";
-
 interface ToggleButtonProps {
   isToggled: boolean;
   onToggle: () => void;
@@ -14,8 +12,12 @@ const ToggleButton = ({
   label2,
 }: ToggleButtonProps) => {
   return (
-    <div dir="ltr" className="flex items-center justify-center">
-      <h3 className={`font-bold p-2 ${isToggled ? "" : "text-light-gray"}`}>
+    <div dir="ltr" className="flex items-center justify-center w-full h-full">
+      <h3
+        className={`font-bold px-2 text-sm ${
+          isToggled ? "" : "text-light-gray"
+        }`}
+      >
         {label1}
       </h3>
       <button
@@ -29,7 +31,11 @@ const ToggleButton = ({
           }`}
         ></div>
       </button>
-      <h3 className={`font-bold p-2 ${!isToggled ? "" : "text-light-gray"}`}>
+      <h3
+        className={`font-bold px-2 text-sm ${
+          !isToggled ? "" : "text-light-gray"
+        }`}
+      >
         {label2}
       </h3>
     </div>

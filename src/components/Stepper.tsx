@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StepType } from "../types/StepType";
 import store from "storejs";
 import { IconTick } from "../assets/icons/IconTIck";
+import { useTranslation } from "react-i18next";
 
 interface IStepperProps {
   steps: StepType[];
@@ -20,6 +21,7 @@ const Stepper: React.FC<IStepperProps> = ({
 }) => {
   const stepIndex = store.get("step") as number;
   const [isFading, setIsFading] = useState(false);
+  const { t } = useTranslation();
 
   const currentStepHandler = (index: number) => {
     if (index < stepIndex && stepIndex <= 4) {
@@ -53,9 +55,9 @@ const Stepper: React.FC<IStepperProps> = ({
                 {index < stepIndex - 1 ? <IconTick /> : index + 1}
               </div>
 
-              <div className="flex flex-col md:pr-4 text-start">
+              <div className="flex flex-col md:px-4 text-start">
                 <span className="text-white font-semibold text-xs hidden md:block">
-                  {step.description}
+                  {t(step.description)}
                 </span>
               </div>
             </div>

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "OnlineService",
+    "label": "Online service",
+    "description": "Access to multiplayer games",
+    "month": "+$1/mo",
+    "year": "+10/yr",
+    "moneyMonth": 1,
+    "moneyYear": 10
+  },
+  {
+    "id": 2,
+    "name": "LargeStorage",
+    "label": "Larger storage",
+    "description": "Extra 1TB cloud save",
+    "month": "+$2/mo",
+    "year": "+20/yr",
+    "moneyMonth": 2,
+    "moneyYear": 20
+  },
+  {
+    "id": 3,
+    "name": "CustomProfile",
+    "label": "Customizable profile",
+    "description": "Custom them on your profile",
+    "month": "+$2/mo",
+    "year": "+20/yr",
+    "moneyMonth": 20,
+    "moneyYear": 200
+  }
+]

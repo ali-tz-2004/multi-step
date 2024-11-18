@@ -5,6 +5,7 @@ import { planCards } from "../../data/SelectPlaneData";
 import useStoreState from "../../hooks/useStoreState";
 import store from "storejs";
 import { PlaneType } from "../../types/PlaneType";
+import { useTranslation } from "react-i18next";
 
 interface ISelectPlanProps {
   nextStep?: () => void;
@@ -23,6 +24,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   );
 
   const [planeId, setPlaneId] = useStoreState("planeId", 0);
+  const { t } = useTranslation();
 
   const toggleHandle = () => {
     const nextIsToggled = !isToggled;
@@ -56,14 +58,12 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
 
   return (
     <div>
-      <h1 className="font-bold text-3xl">طرح خود را انتخاب کنید</h1>
-      <p className="text-light-gray text-xs pb-8">
-        شما می توانید صورتحساب ماهانه یا سالانه را داشته باشید.
-      </p>
+      <h1 className="font-bold text-3xl">{t("SelectYourPlan")}</h1>
+      <p className="text-light-gray text-xs pb-8">{t("SelectYourPlanDes")}</p>
       <form onSubmit={submit}>
         <div className="flex justify-between w-full gap-4 flex-col md:flex-row">
-          {planCards.map((plane, index) => (
-            <div className="flex-1" key={index}>
+          {planCards.map((plane) => (
+            <div className="flex-1" key={plane.id}>
               <input
                 type="radio"
                 id={plane.idTag}
@@ -82,20 +82,20 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                   {plane.icon}
                   <div>
                     <h3 className="font-bold text-sm md:pt-6 pr-2 md:pr-0">
-                      {plane.title}
+                      {t(plane.title)}
                     </h3>
                     {planeType == PlaneType.monthly && (
                       <span className="text-light-gray text-xs">
-                        {plane.month}
+                        {t(plane.month)}
                       </span>
                     )}
                     {planeType == PlaneType.yearly && (
                       <>
                         <span className="text-light-gray text-xs block">
-                          {plane.year}
+                          {t(plane.year)}
                         </span>
                         <span className="text-light-gray text-xs block">
-                          {plane.messageFree}
+                          {t(plane.messageFree ?? "")}
                         </span>
                       </>
                     )}
@@ -111,8 +111,8 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
             <ToggleButton
               onToggle={toggleHandle}
               isToggled={isToggled}
-              label1="ماهانه"
-              label2="سالانه"
+              label1={t("Monthly")}
+              label2={t("Yearly")}
             />
           </div>
         </div>

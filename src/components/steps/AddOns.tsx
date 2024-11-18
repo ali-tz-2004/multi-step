@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { StepFooter } from "./StepFooter";
-import { getAddOns } from "../../services/AddOnsService";
 import { Alert } from "../Alert";
 import { AxiosError } from "axios";
 import useStoreState from "../../hooks/useStoreState";
 import store from "storejs";
 import { PlaneType } from "../../types/PlaneType";
 import { AddOnsType } from "../../types/AddOnsType";
+import { getAddOnsEn, getAddOnsFa } from "../../services/AddOnsService";
+import { useTranslation } from "react-i18next";
 
 interface IAddOnsProps {
   nextStep?: () => void;
@@ -18,21 +19,21 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   const [addOnsList, setAddOnsList] = useState<AddOnsType[]>([]);
   const [error, setError] = useState<string>();
 
-  const [checkedItems, setCheckedItems] = useStoreState<AddOnsType[]>(
+  const [checkedItems, setCheckedItems] = useStoreState<number[]>(
     "checkedItems",
     []
   );
 
-  const handleCheckboxChange = (addOn: AddOnsType) => {
+  const { t, i18n } = useTranslation();
+
+  const handleCheckboxChange = (addOn: number) => {
     setCheckedItems((prev) => {
-      const exists = prev.find((item) => item.id === addOn.id);
-      return exists
-        ? prev.filter((item) => item.id !== addOn.id)
-        : [...prev, addOn];
+      const exists = prev.find((item) => item === addOn);
+      return exists ? prev.filter((item) => item !== addOn) : [...prev, addOn];
     });
   };
 
-  const submit = () => {
+  const handleSubmit = () => {
     if (nextStep) {
       nextStep();
       const step = store.get("step");
@@ -43,7 +44,8 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
 
   const loadAddOns = async () => {
     try {
-      const result = await getAddOns();
+      const result =
+        i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
       setAddOnsList(result.data);
     } catch (e) {
       const error = e as AxiosError;
@@ -53,7 +55,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   };
 
   useEffect(() => {
-    const storedItems = store.get("checkedItems") as AddOnsType[] | undefined;
+    const storedItems = store.get("checkedItems") as number[] | undefined;
     if (storedItems) {
       setCheckedItems(storedItems);
     }
@@ -61,27 +63,25 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
 
   useEffect(() => {
     loadAddOns();
-  }, []);
+  }, [i18n.language]);
 
   return (
     <div>
-      <h1 className="font-bold text-3xl">افزودنی ها را انتخاب کنید</h1>
-      <p className="text-light-gray text-xs pb-8">
-        افزونه ها به بهبود تجربه بازی شما کمک می کنند.
-      </p>
+      <h1 className="font-bold text-3xl">{t("PickAddOns")}</h1>
+      <p className="text-light-gray text-xs pb-8">{t("PickAddOnsDes")}</p>
       <Alert
         visible={error !== undefined}
         title="خطا"
         message={error}
         onClose={() => setError(undefined)}
       />
-      <form onSubmit={submit}>
+      <form onSubmit={handleSubmit}>
         {addOnsList.map((addOn) => (
           <label
             key={addOn.name}
             htmlFor={addOn.name}
-            className={`flex items-center h-full p-2 mb-2 rounded-lg border cursor-pointer select-none ${
-              checkedItems.some((item) => item.id === addOn.id)
+            className={`flex items-center h-full p-3 mb-2 rounded-lg border cursor-pointer select-none ${
+              checkedItems.some((item) => item === addOn.id)
                 ? "bg-background border-border-input"
                 : ""
             }`}
@@ -90,13 +90,15 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
               id={addOn.name}
               type="checkbox"
               name={addOn.name}
-              className="w-4 h-4 bg-gray-100 border-gray-300 rounded ml-2 accent-blue-600"
-              checked={checkedItems.some((item) => item.id === addOn.id)}
-              onChange={() => handleCheckboxChange(addOn)}
+              className="w-4 h-4 bg-gray-100 border-gray-300 rounded mx-2 accent-blue-600"
+              checked={checkedItems.some((item) => item === addOn.id)}
+              onChange={() => handleCheckboxChange(addOn.id)}
             />
             <div className="flex justify-between items-center w-full">
-              <div className="pr-2">
-                <h3 className="font-bold text-sm">{addOn.label}</h3>
+              <div className="px-2">
+                <h3 className="font-bold text-sm leading-none">
+                  {addOn.label}
+                </h3>
                 <span className="text-light-gray text-xs">
                   {addOn.description}
                 </span>
@@ -104,8 +106,8 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
               <div>
                 <span className="text-border-input font-bold text-xs">
                   {planeType === PlaneType.yearly
-                    ? `${addOn.year}/سالانه`
-                    : `${addOn.month}/ماهانه`}
+                    ? `${addOn.year}`
+                    : `${addOn.month}`}
                 </span>
               </div>
             </div>

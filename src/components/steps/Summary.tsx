@@ -4,6 +4,9 @@ import { planCards } from "../../data/SelectPlaneData";
 import store from "storejs";
 import { PlaneType } from "../../types/PlaneType";
 import { AddOnsType } from "../../types/AddOnsType";
+import { useTranslation } from "react-i18next";
+import { getAddOnsEn, getAddOnsFa } from "../../services/AddOnsService";
+import { AxiosError } from "axios";
 
 interface FinalPlaneType {
   title: string;
@@ -27,7 +30,10 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
 
   const [plane, setPlane] = useState<FinalPlaneType>();
   const [checkedItems, setCheckedItems] = useState<CheckedItemType[]>([]);
+  const [addOnsList, setAddOnsList] = useState<AddOnsType[]>([]);
   const [total, setTotal] = useState<number>();
+
+  const { t, i18n } = useTranslation();
 
   const fillPanel = (planeType: PlaneType) => {
     const planeId = store.get("planeId") as number;
@@ -36,10 +42,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
       let planeCard = planCards.find((x) => x.id == planeId);
       if (planeCard) {
         setPlane({
-          title:
-            planeType == PlaneType.monthly
-              ? `${planeCard?.title} (ماهانه)`
-              : `${planeCard?.title} (سالانه)`,
+          title: planeCard?.title,
           moneyText:
             planeType == PlaneType.monthly ? planeCard?.month : planeCard?.year,
           money:
@@ -51,16 +54,14 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
     }
   };
 
-  const items: AddOnsType[] = (store.get("checkedItems") as AddOnsType[]) || [];
+  const getCheckedItems: number[] =
+    (store.get("checkedItems") as number[]) || [];
 
   const fillCheckedItem = (planeType: PlaneType) => {
     setCheckedItems([
-      ...items.map((x) => ({
+      ...addOnsList.map((x) => ({
         title: x.label,
-        moneyText:
-          planeType == PlaneType.monthly
-            ? `${x.month}/ماهانه`
-            : `${x.year}/سالانه`,
+        moneyText: planeType == PlaneType.monthly ? `${x.month}` : `${x.year}`,
         money: x.moneyMonth,
       })),
     ]);
@@ -89,7 +90,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
     fillPanel(planeType);
     fillCheckedItem(planeType);
 
-    const sum = items.reduce(
+    const sum = addOnsList.reduce(
       (partialSum, a) =>
         partialSum +
         (planeType === PlaneType.monthly ? a.moneyMonth : a.moneyYear),
@@ -99,27 +100,49 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
     const sumTotal = (plane?.money ?? 0) + sum;
 
     setTotal(sumTotal);
-  }, [planeType, items, plane]);
+  }, [planeType, addOnsList, plane]);
+
+  const loadAddOns = async () => {
+    try {
+      const result =
+        i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
+      setAddOnsList(result.data.filter((x) => getCheckedItems.includes(x.id)));
+    } catch (e) {
+      const error = e as AxiosError;
+      console.error("Error fetching add-ons data:", error);
+      setAddOnsList([]);
+    }
+  };
+
+  useEffect(() => {
+    loadAddOns();
+  }, [i18n.language]);
 
   return (
     <form onSubmit={confirmHandler}>
-      <h1 className="font-bold text-3xl">تمام کردن</h1>
+      <h1 className="font-bold text-3xl">{t("FinishingUp")}</h1>
       <p className="text-light-gray text-xs block pb-8">
-        قبل از تأیید دوباره بررسی کنید همه چیز درست به نظر می رسد.
+        {t("FinishingUpDes")}
       </p>
       <div className="w-full bg-card-summary p-4 rounded-lg">
         <div className="flex justify-between items-center pb-4">
           <div>
-            <h3 className="text-sm font-bold">{plane?.title}</h3>
+            <h3 className="text-sm font-bold">{`${t(plane?.title ?? "")} ${
+              planeType == PlaneType.monthly
+                ? `(${t("Monthly")})`
+                : `(${t("Yearly")})`
+            }`}</h3>
             <span
               className="text-xs underline cursor-pointer text-light-gray"
               onClick={changePlaneHandler}
             >
-              عوض کردن
+              {t("Change")}
             </span>
           </div>
           <div>
-            <span className="font-bold text-xs">{plane?.moneyText}</span>
+            <span className="font-bold text-xs">
+              {t(plane?.moneyText ?? "")}
+            </span>
           </div>
         </div>
         <hr />
@@ -128,18 +151,24 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
             className="flex justify-between py-1 mt-2 overflow-hidden"
             key={index}
           >
-            <span className="text-light-gray text-xs">{x.title}</span>
-            <span className="text-xs">{x.moneyText}</span>
+            <span className="text-light-gray text-xs">{t(x.title)}</span>
+            <span className="text-xs">{t(x.moneyText)}</span>
           </div>
         ))}
       </div>
       <div className="w-full p-4 flex justify-between">
-        <span className="text-light-gray text-xs">{`در کل ${
-          planeType == PlaneType.monthly ? "(ماهانه)" : "(سالانه)"
+        <span className="text-light-gray text-xs">{`${t("Total")} ${
+          planeType == PlaneType.monthly ? t("PerMonth") : t("PerYear")
         }`}</span>
-        <span className="text-border-input font-bold text-lg">{`${total}ت/
-         ${planeType == PlaneType.monthly ? "ماهانه" : "سالانه"}
-        `}</span>
+        <span className="text-border-input font-bold text-lg">
+          {i18n.language === "fa"
+            ? `${total} ${t("TypeMoney")} ${
+                planeType === PlaneType.monthly ? t("Mo") : t("Yr")
+              }`
+            : `${t("TypeMoney")}${total}/ ${
+                planeType === PlaneType.monthly ? t("Mo") : t("Yr")
+              }`}
+        </span>
       </div>
       <br />
       <StepFooter prevStep={prevStep} step={4} />

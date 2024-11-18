@@ -8,6 +8,7 @@ import { getFormInfo } from "../../data/PersonalInfoData";
 import store from "storejs";
 import useStoreState from "../../hooks/useStoreState";
 import { ErrorMessage } from "../../types/ErrorMessage";
+import { useTranslation } from "react-i18next";
 
 interface PersonalInfoProps {
   nextStep?: () => void;
@@ -34,6 +35,8 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
   });
 
   const newErrors: ErrorMessage = { name: "", email: "", phone: "" };
+
+  const { t } = useTranslation();
 
   const validateForm = () => {
     if (!name) newErrors.name = errorMessageRequired();
@@ -86,18 +89,16 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
 
   return (
     <div>
-      <h1 className="font-bold text-3xl">اطلاعات شخصی</h1>
-      <p className="text-light-gray text-xs pb-8">
-        لطفا نام، آدرس ایمیل و شماره تلفن خود را وارد کنید.
-      </p>
+      <h1 className="font-bold text-3xl">{t("PersonalInfo")}</h1>
+      <p className="text-light-gray text-xs pb-8">{t("PersonalInfoDes")}</p>
       <form onSubmit={submit}>
         {formInfo.map((field, index) => (
           <div key={index} className="mb-4">
             <div className="flex justify-between">
-              <label className="block mb-2 text-sm">{field.labelName}</label>
+              <label className="block mb-2 text-sm">{t(field.labelName)}</label>
               {field.errorMessage && (
                 <span className="text-red-500 text-xs font-bold">
-                  {field.errorMessage}
+                  {t(field.errorMessage)}
                 </span>
               )}
             </div>
@@ -108,7 +109,7 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
                   ? "border-red-500"
                   : "focus:border-foreground"
               }`}
-              placeholder={field.placeholder}
+              placeholder={t(field.placeholder)}
               value={field.value}
               onChange={field.changeHandler}
               maxLength={field.maxLength}

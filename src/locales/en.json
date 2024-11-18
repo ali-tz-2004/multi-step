@@ -1,0 +1,68 @@
+{
+  "NextStep": "Next Step",
+  "GoBack": "Go Back",
+  "Confirm": "Confirm",
+
+  "Step1": "STEP 1",
+  "YouInfoStepper": "YOU INFO",
+  "Step2": "STEP 2",
+  "SelectPlaneStepper": "SELECT PLAN",
+  "Step3": "STEP 3",
+  "AddOnsStepper": "ADD ONS",
+  "Step4": "STEP 4",
+  "SummaryStepper": "SUMMARY",
+  "Step5": "STEP 5",
+  "Final": "FINAL",
+
+  "PersonalInfo": "Personal info",
+  "PersonalInfoDes": "Please provide your name, email, address, and phone number.",
+  "PersonalInfoName": "Name",
+  "PersonalInfoPlaceholderName": "e.g.Stephen King",
+  "PersonalInfoEmail": "Email Address",
+  "PersonalInfoPlaceholderEmail": "e.g.stephenking@lorem.com",
+  "PersonalInfoPhone": "Phone Number",
+  "PersonalInfoPlaceholderPhone": "e.g.+1 234 567 890",
+  "MessageRequired": "This field is required",
+  "MessageValid": "This field is not valid",
+
+  "SelectYourPlan": "Select your plan",
+  "SelectYourPlanDes": "You have the option of monthly or yearly billing.",
+  "SelectYourPlanArcade": "Arcade",
+  "SelectYourPlanArcadeMoneyMonth": "$9/mo",
+  "SelectYourPlanArcadeMoneyYear": "$90/yr",
+  "SelectYourPlanArcadeMoneyYearMessage": "2 month free",
+  "SelectYourPlanAdvanced": "Advanced",
+  "SelectYourPlanAdvancedMoneyMonth": "$12/mo",
+  "SelectYourPlanAdvancedMoneyYear": "$120/yr",
+  "SelectYourPlanAdvancedMoneyYearMessage": "2 month free",
+  "SelectYourPlanPro": "Pro",
+  "SelectYourPlanProMoneyMonth": "$15/mo",
+  "SelectYourPlanProMoneyYear": "$150/yr",
+  "SelectYourPlanProMoneyYearMessage": "2 month free",
+
+  "Monthly": "Monthly",
+  "Yearly": "Yearly",
+  "Mo": "Mo",
+  "Yr": "Yr",
+  "PerMonth": "(per month)",
+  "PerYear": "(per year)",
+  "TypeMoney": "$",
+
+  "PickAddOns": "Pick add-ons",
+  "PickAddOnsDes": "Add-ons help enhance your gamin experience.",
+
+  "FinishingUp": "Finishing up",
+  "FinishingUpDes": "Double-check everything looks OK before confirming.",
+
+  "Change": "Change",
+  "Total": "Total",
+
+  "TankYou": "Tank you!",
+  "FinalMessage": "Tanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.",
+
+  "DarkTheme": "DarkTm",
+  "LightTheme": "LightTm",
+
+  "Language": "Language",
+  "Select": "Selected"
+}
