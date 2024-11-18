@@ -46,7 +46,7 @@ const ComboBox: React.FC<ComboBoxProps> = ({
   }, []);
 
   useEffect(() => {
-    if (defaultValue) onSelect(defaultValue);
+    if (defaultValue) setSelectedOption(defaultValue);
   }, [defaultValue]);
 
   return (
