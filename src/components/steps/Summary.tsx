@@ -40,15 +40,18 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
 
     if (planeId) {
       let planeCard = planCards.find((x) => x.id == planeId);
+
       if (planeCard) {
         setPlane({
           title: planeCard?.title,
           moneyText:
-            planeType == PlaneType.monthly ? planeCard?.month : planeCard?.year,
+            planeType === PlaneType.monthly
+              ? planeCard?.month
+              : planeCard?.year,
           money:
-            planeType == PlaneType.monthly
-              ? planeCard.moneyMonth
-              : planeCard.moneyYear,
+            planeType === PlaneType.monthly
+              ? Number(t(planeCard.moneyMonth))
+              : Number(t(planeCard.moneyYear)),
         });
       }
     }
@@ -61,8 +64,8 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
     setCheckedItems([
       ...addOnsList.map((x) => ({
         title: x.label,
-        moneyText: planeType == PlaneType.monthly ? `${x.month}` : `${x.year}`,
-        money: x.moneyMonth,
+        moneyText: planeType === PlaneType.monthly ? `${x.month}` : `${x.year}`,
+        money: planeType === PlaneType.monthly ? x.moneyMonth : x.moneyYear,
       })),
     ]);
   };
@@ -90,17 +93,21 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
     fillPanel(planeType);
     fillCheckedItem(planeType);
 
-    const sum = addOnsList.reduce(
-      (partialSum, a) =>
-        partialSum +
-        (planeType === PlaneType.monthly ? a.moneyMonth : a.moneyYear),
-      0
-    );
+    let sum = 0;
+    if (addOnsList.length > 0) {
+      sum = addOnsList.reduce(
+        (partialSum, a) =>
+          partialSum +
+          (planeType === PlaneType.monthly
+            ? Number(a.moneyMonth || 0)
+            : Number(a.moneyYear || 0)),
+        0
+      );
+    }
 
     const sumTotal = (plane?.money ?? 0) + sum;
-
     setTotal(sumTotal);
-  }, [planeType, addOnsList, plane]);
+  }, [planeType, addOnsList, i18n.language]);
 
   const loadAddOns = async () => {
     try {
@@ -128,7 +135,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
         <div className="flex justify-between items-center pb-4">
           <div>
             <h3 className="text-sm font-bold">{`${t(plane?.title ?? "")} ${
-              planeType == PlaneType.monthly
+              planeType === PlaneType.monthly
                 ? `(${t("Monthly")})`
                 : `(${t("Yearly")})`
             }`}</h3>
@@ -158,11 +165,11 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
       </div>
       <div className="w-full p-4 flex justify-between">
         <span className="text-light-gray text-xs">{`${t("Total")} ${
-          planeType == PlaneType.monthly ? t("PerMonth") : t("PerYear")
+          planeType === PlaneType.monthly ? t("PerMonth") : t("PerYear")
         }`}</span>
         <span className="text-border-input font-bold text-lg">
           {i18n.language === "fa"
-            ? `${total} ${t("TypeMoney")} ${
+            ? `${total} ${t("TypeMoney")}/ ${
                 planeType === PlaneType.monthly ? t("Mo") : t("Yr")
               }`
             : `${t("TypeMoney")}${total}/ ${

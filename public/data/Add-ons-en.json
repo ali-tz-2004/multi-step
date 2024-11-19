@@ -26,7 +26,7 @@
     "description": "Custom them on your profile",
     "month": "+$2/mo",
     "year": "+20/yr",
-    "moneyMonth": 20,
-    "moneyYear": 200
+    "moneyMonth": 2,
+    "moneyYear": 20
   }
 ]

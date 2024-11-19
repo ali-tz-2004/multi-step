@@ -11,8 +11,8 @@ interface IPlanCards {
   year: string;
   messageFree?: string;
   value: string;
-  moneyMonth: number;
-  moneyYear: number;
+  moneyMonth: string;
+  moneyYear: string;
 }
 
 export const planCards: IPlanCards[] = [
@@ -21,35 +21,35 @@ export const planCards: IPlanCards[] = [
     idTag: "plane-1",
     icon: <IconArcade />,
     title: "SelectYourPlanArcade",
-    month: "SelectYourPlanArcadeMoneyMonth",
-    year: "SelectYourPlanArcadeMoneyYear",
-    messageFree: "SelectYourPlanArcadeMoneyYearMessage",
+    month: "SelectYourPlanArcadeMonth",
+    year: "SelectYourPlanArcadeYear",
+    messageFree: "SelectYourPlanArcadeYearMessage",
     value: "arcade",
-    moneyMonth: 10,
-    moneyYear: 100,
+    moneyMonth: "SelectYourPlanArcadeMoneyMonth",
+    moneyYear: "SelectYourPlanArcadeMoneyYear",
   },
   {
     id: 2,
     idTag: "plane-2",
     icon: <IconAdvanced />,
     title: "SelectYourPlanAdvanced",
-    month: "SelectYourPlanAdvancedMoneyMonth",
-    year: "SelectYourPlanAdvancedMoneyYear",
-    messageFree: "SelectYourPlanAdvancedMoneyYearMessage",
+    month: "SelectYourPlanAdvancedMonth",
+    year: "SelectYourPlanAdvancedYear",
+    messageFree: "SelectYourPlanAdvancedYearMessage",
     value: "advance",
-    moneyMonth: 20,
-    moneyYear: 200,
+    moneyMonth: "SelectYourPlanAdvancedMoneyMonth",
+    moneyYear: "SelectYourPlanAdvancedMoneyYear",
   },
   {
     id: 3,
     idTag: "plane-3",
     icon: <IconPro />,
     title: "SelectYourPlanPro",
-    month: "SelectYourPlanProMoneyMonth",
-    year: "SelectYourPlanProMoneyYear",
-    messageFree: "SelectYourPlanProMoneyYearMessage",
+    month: "SelectYourPlanProMonth",
+    year: "SelectYourPlanProYear",
+    messageFree: "SelectYourPlanProYearMessage",
     value: "pro",
-    moneyMonth: 40,
-    moneyYear: 400,
+    moneyMonth: "SelectYourPlanProMoneyMonth",
+    moneyYear: "SelectYourPlanProMoneyYear",
   },
 ];
