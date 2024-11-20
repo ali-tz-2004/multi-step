@@ -19,7 +19,7 @@ i18n.use(initReactI18next).init({
       translation: fa,
     },
   },
-  lng: (store.get("language") as IdTitleType).title,
+  lng: (store.get("language") as IdTitleType)?.title ?? "en",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,
