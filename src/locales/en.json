@@ -72,5 +72,7 @@
   "LightTheme": "LightTm",
 
   "Language": "Language",
-  "Select": "Selected"
+  "Select": "Selected",
+
+  "tm": "background color"
 }

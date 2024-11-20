@@ -83,17 +83,30 @@ export const Menu = () => {
   return (
     <div className="z-10 h-full">
       <div
-        className="absolute top-0 right-0 md:m-10 m-4 cursor-pointer"
+        className={`absolute top-0 ${
+          language.id == 1 ? "left-0" : "right-0"
+        } md:m-10 m-4 cursor-pointer`}
         onClick={menuHandler}
       >
         <IconMenuBar />
       </div>
       {isMenu && (
-        <div className="h-full bg-card md:w-56 w-40 fixed right-0 cursor-pointer">
-          <div className="absolute left-0 top-0 m-3" onClick={menuHandler}>
+        <div
+          className={`h-full bg-card md:w-56 w-48 fixed cursor-pointer ${
+            language.id == 1 ? "left-0" : "right-0"
+          } `}
+        >
+          <div
+            className={`absolute top-0 m-3 ${
+              language.id == 1 ? "right-0" : "left-0"
+            }`}
+            onClick={menuHandler}
+          >
             <IconClose />
           </div>
           <div className="absolute md:top-10 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg">
+            <label className="block text-sm font-medium mb-2">{t("tm")}:</label>
+
             <ToggleButton
               isToggled={isDarkTheme}
               onToggle={toggleHandle}
@@ -101,9 +114,9 @@ export const Menu = () => {
               label2={t("LightTheme")}
             />
           </div>
-          <div className="absolute md:top-24 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg">
+          <div className="absolute top-10 md:top-32 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg w-full">
             <ComboBox
-              label={`${t("Language")}`}
+              label={`${t("Language")}:`}
               onSelect={languageHandler}
               defaultValue={language}
               options={languages}

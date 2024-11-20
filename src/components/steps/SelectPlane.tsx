@@ -80,8 +80,8 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
               >
                 <div className="flex items-start md:block">
                   {plane.icon}
-                  <div>
-                    <h3 className="font-bold text-sm md:pt-6 pr-2 md:pr-0">
+                  <div className="px-2 md:px-0">
+                    <h3 className="font-bold text-sm md:pt-6 md:pr-0">
                       {t(plane.title)}
                     </h3>
                     {planeType == PlaneType.monthly && (
