@@ -8,6 +8,7 @@ import { PlaneType } from "../../types/PlaneType";
 import { AddOnsType } from "../../types/AddOnsType";
 import { getAddOnsEn, getAddOnsFa } from "../../services/AddOnsService";
 import { useTranslation } from "react-i18next";
+import { OrbitProgress } from "react-loading-indicators";
 
 interface IAddOnsProps {
   nextStep?: () => void;
@@ -18,6 +19,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   const planeType = store.get("planeType") as PlaneType;
   const [addOnsList, setAddOnsList] = useState<AddOnsType[]>([]);
   const [error, setError] = useState<string>();
+  const [isLoading, setIsLoading] = useState(true);
 
   const [checkedItems, setCheckedItems] = useStoreState<number[]>(
     "checkedItems",
@@ -47,10 +49,12 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
       const result =
         i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
       setAddOnsList(result.data);
+      setIsLoading(false);
     } catch (e) {
       const error = e as AxiosError;
       console.error("Error fetching add-ons data:", error);
       setError(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -75,6 +79,17 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
         message={error}
         onClose={() => setError(undefined)}
       />
+      {isLoading && (
+        <div className="text-center">
+          <OrbitProgress
+            dense
+            color="#32cd32"
+            size="large"
+            text={t("Loading")}
+            textColor=""
+          />
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         {addOnsList.map((addOn) => (
           <label

@@ -7,6 +7,7 @@ import { AddOnsType } from "../../types/AddOnsType";
 import { useTranslation } from "react-i18next";
 import { getAddOnsEn, getAddOnsFa } from "../../services/AddOnsService";
 import { AxiosError } from "axios";
+import { OrbitProgress } from "react-loading-indicators";
 
 interface FinalPlaneType {
   title: string;
@@ -32,6 +33,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
   const [checkedItems, setCheckedItems] = useState<CheckedItemType[]>([]);
   const [addOnsList, setAddOnsList] = useState<AddOnsType[]>([]);
   const [total, setTotal] = useState<number>();
+  const [isLoading, setIsLoading] = useState(true);
 
   const { t, i18n } = useTranslation();
 
@@ -114,10 +116,12 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
       const result =
         i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
       setAddOnsList(result.data.filter((x) => getCheckedItems.includes(x.id)));
+      setIsLoading(false);
     } catch (e) {
       const error = e as AxiosError;
       console.error("Error fetching add-ons data:", error);
       setAddOnsList([]);
+      setIsLoading(false);
     }
   };
 
@@ -153,6 +157,17 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
           </div>
         </div>
         <hr />
+        {isLoading && (
+          <div className="text-center">
+            <OrbitProgress
+              dense
+              color="#32cd32"
+              size="large"
+              text={t("Loading")}
+              textColor=""
+            />
+          </div>
+        )}
         {checkedItems.map((x, index) => (
           <div
             className="flex justify-between py-1 mt-2 overflow-hidden"
