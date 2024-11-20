@@ -3,6 +3,8 @@ import { initReactI18next } from "react-i18next";
 
 import en from "./locales/en.json";
 import fa from "./locales/fa.json";
+import store from "storejs";
+import { IdTitleType } from "./types/IdTitleType";
 
 const isRTL = (lang: string) => {
   return ["fa", "ar"].includes(lang);
@@ -17,7 +19,7 @@ i18n.use(initReactI18next).init({
       translation: fa,
     },
   },
-  lng: "en",
+  lng: (store.get("language") as IdTitleType).title,
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,

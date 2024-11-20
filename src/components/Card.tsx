@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Stepper from "./Stepper";
 import { steps } from "../data/StepperData";
 import store from "storejs";
