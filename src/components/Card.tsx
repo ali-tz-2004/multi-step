@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import Stepper from "./Stepper";
 import { steps } from "../data/StepperData";
 import store from "storejs";
+import useStoreState from "../hooks/useStoreState";
 
 export const Card = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useStoreState("currentStep", 0);
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
@@ -26,6 +27,9 @@ export const Card = () => {
     const step = store.get("step");
     if (step > 1) return;
     store.set("step", 1);
+
+    const currentSte = store.get("currentStep") as number;
+    setCurrentStep(currentSte ?? 0);
   }, []);
 
   return (
