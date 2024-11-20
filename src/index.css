@@ -68,3 +68,8 @@ input {
   --slider-desktop: url("./assets/images/bg-sidebar-desktop-dark.svg");
   --slider-mobile: url("./assets/images/bg-sidebar-mobile-dark.svg");
 }
+
+.menu {
+  transition: width 1s;
+  overflow: hidden;
+}

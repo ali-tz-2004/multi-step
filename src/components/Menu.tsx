@@ -19,10 +19,22 @@ export const Menu = () => {
     title: "en",
   });
   const [languages, setLanguages] = useState<IdTitleType[]>([]);
+  const [widthMenu, setWidthMenu] = useState("w-0");
 
   const { t, i18n } = useTranslation();
 
-  const menuHandler = () => setIsMenu(!isMenu);
+  const menuHandler = () => {
+    if (isMenu) {
+      setWidthMenu("w-0");
+
+      setTimeout(() => {
+        setIsMenu(false);
+      }, 500);
+    } else {
+      setWidthMenu("w-56");
+      setIsMenu(true);
+    }
+  };
 
   const addClassToBody = (nextIsDarkTheme: boolean) => {
     document.body.classList.toggle("dark", nextIsDarkTheme);
@@ -90,40 +102,44 @@ export const Menu = () => {
       >
         <IconMenuBar />
       </div>
-      {isMenu && (
-        <div
-          className={`h-full bg-card md:w-56 w-48 fixed cursor-pointer ${
-            language.id == 1 ? "left-0" : "right-0"
-          } `}
-        >
-          <div
-            className={`absolute top-0 m-3 ${
-              language.id == 1 ? "right-0" : "left-0"
-            }`}
-            onClick={menuHandler}
-          >
-            <IconClose />
-          </div>
-          <div className="absolute md:top-10 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg">
-            <label className="block text-sm font-medium mb-2">{t("tm")}:</label>
+      <div
+        className={`h-full bg-card fixed cursor-pointer menu ${
+          language.id == 1 ? "left-0" : "right-0"
+        } ${widthMenu}`}
+      >
+        {isMenu && (
+          <div>
+            <div
+              className={`absolute top-0 m-3 ${
+                language.id == 1 ? "right-0" : "left-0"
+              }`}
+              onClick={menuHandler}
+            >
+              <IconClose />
+            </div>
+            <div className="absolute md:top-10 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg">
+              <label className="block text-sm font-medium mb-2">
+                {t("tm")}:
+              </label>
 
-            <ToggleButton
-              isToggled={isDarkTheme}
-              onToggle={toggleHandle}
-              label1={t("DarkTheme")}
-              label2={t("LightTheme")}
-            />
+              <ToggleButton
+                isToggled={isDarkTheme}
+                onToggle={toggleHandle}
+                label1={t("DarkTheme")}
+                label2={t("LightTheme")}
+              />
+            </div>
+            <div className="absolute top-24 md:top-32 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg w-full">
+              <ComboBox
+                label={`${t("Language")}:`}
+                onSelect={languageHandler}
+                defaultValue={language}
+                options={languages}
+              />
+            </div>
           </div>
-          <div className="absolute top-10 md:top-32 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg w-full">
-            <ComboBox
-              label={`${t("Language")}:`}
-              onSelect={languageHandler}
-              defaultValue={language}
-              options={languages}
-            />
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
