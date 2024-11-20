@@ -29,7 +29,7 @@ export const StepFooter = ({ prevStep, step }: TfootStepperProps) => {
         type="submit"
         className="bg-btn-next-step px-4 py-2 text-white rounded-md text-sm hover:bg-btn-next-step-hover"
       >
-        {`${step == 4 ? t("Confirm") : t("NextStep")}`}
+        {`${step === 4 ? t("Confirm") : t("NextStep")}`}
       </button>
     </div>
   );

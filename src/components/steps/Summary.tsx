@@ -41,7 +41,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
     const planeId = store.get("planeId") as number;
 
     if (planeId) {
-      let planeCard = planCards.find((x) => x.id == planeId);
+      let planeCard = planCards.find((x) => x.id === planeId);
 
       if (planeCard) {
         setPlane({

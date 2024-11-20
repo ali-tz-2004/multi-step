@@ -70,7 +70,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                 className="hidden peer"
                 name="radio"
                 value={plane.id}
-                checked={planeId == plane.id}
+                checked={planeId === plane.id}
                 onChange={changeValuePlanHandler}
                 required
               />
@@ -84,12 +84,12 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                     <h3 className="font-bold text-sm md:pt-6 md:pr-0">
                       {t(plane.title)}
                     </h3>
-                    {planeType == PlaneType.monthly && (
+                    {planeType === PlaneType.monthly && (
                       <span className="text-light-gray text-xs">
                         {t(plane.month)}
                       </span>
                     )}
-                    {planeType == PlaneType.yearly && (
+                    {planeType === PlaneType.yearly && (
                       <>
                         <span className="text-light-gray text-xs block">
                           {t(plane.year)}

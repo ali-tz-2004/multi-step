@@ -96,7 +96,7 @@ export const Menu = () => {
     <div className="z-10 h-full">
       <div
         className={`absolute top-0 ${
-          language.id == 1 ? "left-0" : "right-0"
+          language.id === 1 ? "left-0" : "right-0"
         } md:m-10 m-4 cursor-pointer`}
         onClick={menuHandler}
       >
@@ -104,14 +104,14 @@ export const Menu = () => {
       </div>
       <div
         className={`h-full bg-card fixed cursor-pointer menu ${
-          language.id == 1 ? "left-0" : "right-0"
+          language.id === 1 ? "left-0" : "right-0"
         } ${widthMenu}`}
       >
         {isMenu && (
           <div>
             <div
               className={`absolute top-0 m-3 ${
-                language.id == 1 ? "right-0" : "left-0"
+                language.id === 1 ? "right-0" : "left-0"
               }`}
               onClick={menuHandler}
             >
