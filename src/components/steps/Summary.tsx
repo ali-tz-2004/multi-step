@@ -109,7 +109,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
 
     const sumTotal = (plane?.money ?? 0) + sum;
     setTotal(sumTotal);
-  }, [planeType, addOnsList, i18n.language]);
+  }, [planeType, addOnsList, i18n.language, setCheckedItems]);
 
   const loadAddOns = async () => {
     try {

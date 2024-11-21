@@ -44,20 +44,6 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
     }
   };
 
-  const loadAddOns = async () => {
-    try {
-      const result =
-        i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
-      setAddOnsList(result.data);
-      setIsLoading(false);
-    } catch (e) {
-      const error = e as AxiosError;
-      console.error("Error fetching add-ons data:", error);
-      setError(error.message);
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
     const storedItems = store.get("checkedItems") as number[] | undefined;
     if (storedItems) {
@@ -66,7 +52,21 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   }, [setCheckedItems]);
 
   useEffect(() => {
-    loadAddOns();
+    const fetchAddOns = async () => {
+      try {
+        const result =
+          i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
+        setAddOnsList(result.data);
+        setIsLoading(false);
+      } catch (e) {
+        const error = e as AxiosError;
+        console.error("Error fetching add-ons data:", error);
+        setError(error.message);
+        setIsLoading(false);
+      }
+    };
+
+    fetchAddOns();
   }, [i18n.language]);
 
   return (

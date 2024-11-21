@@ -1,4 +1,4 @@
-export interface IdTitleType {
+export interface IdTitleType<T = string> {
   id: number;
-  title: string;
+  title: T;
 }

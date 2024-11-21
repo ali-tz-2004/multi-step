@@ -54,7 +54,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
     setPlaneType(storedPlaneType || PlaneType.monthly);
 
     setIsToggled(storedPlaneType === PlaneType.monthly);
-  }, []);
+  }, [setPlaneId, setPlaneType, setIsToggled]);
 
   return (
     <div>

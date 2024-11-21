@@ -27,10 +27,12 @@ export const Card = () => {
     const step = store.get("step");
     if (step > 1) return;
     store.set("step", 1);
-
-    const currentSte = store.get("currentStep") as number;
-    setCurrentStep(currentSte ?? 0);
   }, []);
+
+  useEffect(() => {
+    const currentSte = store.get("currentStep") as number | undefined;
+    setCurrentStep(currentSte ?? 0);
+  }, [setCurrentStep]);
 
   return (
     <>

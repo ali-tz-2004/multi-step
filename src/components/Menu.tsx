@@ -72,14 +72,16 @@ export const Menu = () => {
       setIsDarkTheme(storedTheme);
       addClassToBody(storedTheme);
     }
+  }, [setIsDarkTheme]);
 
+  useEffect(() => {
     const storedLanguage = store.get("language") as IdTitleType | undefined;
     if (storedLanguage) {
       setLanguage(storedLanguage);
     } else {
       setLanguage({ id: 1, title: "en" });
     }
-  }, []);
+  }, [setLanguage]);
 
   useEffect(() => {
     if (languages.length > 0) {
@@ -90,7 +92,7 @@ export const Menu = () => {
 
       if (defaultLang) setLanguage(defaultLang);
     }
-  }, [i18n.language, languages]);
+  }, [i18n.language, languages, setLanguage]);
 
   return (
     <div className="z-10 h-full">
