@@ -52,7 +52,7 @@ const ComboBox: React.FC<ComboBoxProps> = ({
   return (
     <div ref={comboBoxRef} className="relative w-full max-w-xs">
       {label && (
-        <label className="block text-sm font-medium mb-2">{label}</label>
+        <label className="block text-sm font-medium mb-3">{label}</label>
       )}
       <button
         type="button"

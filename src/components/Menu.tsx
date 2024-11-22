@@ -31,7 +31,7 @@ export const Menu = () => {
         setIsMenu(false);
       }, 500);
     } else {
-      setWidthMenu("w-56");
+      setWidthMenu("w-62");
       setIsMenu(true);
     }
   };
@@ -105,12 +105,12 @@ export const Menu = () => {
         <IconMenuBar />
       </div>
       <div
-        className={`h-full bg-card fixed cursor-pointer menu ${
+        className={`h-full bg-card fixed cursor-pointer menu shadow-md ${
           language.id === 1 ? "left-0" : "right-0"
         } ${widthMenu}`}
       >
         {isMenu && (
-          <div>
+          <div className="mx-2 my-14 p-3">
             <div
               className={`absolute top-0 m-3 ${
                 language.id === 1 ? "right-0" : "left-0"
@@ -119,8 +119,8 @@ export const Menu = () => {
             >
               <IconClose />
             </div>
-            <div className="absolute md:top-10 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg">
-              <label className="block text-sm font-medium mb-2">
+            <div className="rounded-lg bg-background w-full p-3 shadow-md">
+              <label className="block text-sm font-medium pb-3">
                 {t("tm")}:
               </label>
 
@@ -131,7 +131,7 @@ export const Menu = () => {
                 label2={t("LightTheme")}
               />
             </div>
-            <div className="absolute top-24 md:top-32 md:right-0 md:p-5 md:mt-0 p-1 mt-14 z-10 bg-card rounded-lg w-full">
+            <div className="rounded-lg w-full bg-background p-3 my-5 shadow-md">
               <ComboBox
                 label={`${t("Language")}:`}
                 onSelect={languageHandler}
