@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 interface ComboBoxProps {
   options: IdTitleType[];
-  label?: string;
+  label?: React.ReactNode;
   defaultValue?: IdTitleType;
   onSelect: (value: IdTitleType) => void;
 }
@@ -51,16 +51,16 @@ const ComboBox: React.FC<ComboBoxProps> = ({
 
   return (
     <div ref={comboBoxRef} className="relative w-full max-w-xs">
-      {label && (
-        <label className="block text-sm font-medium mb-3">{label}</label>
-      )}
+      {label && <div>{label}</div>}
       <button
         type="button"
         className="w-full bg-background border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
         onClick={toggleDropdown}
       >
-        <p className="text-center">{selectedOption?.title || t("Select")}</p>
-        <span className="absolute inset-y-0 right-0 flex items-center pr-2 pt-6 pointer-events-none">
+        <p className="text-center">
+          {t(selectedOption?.title ?? "") || t("Select")}
+        </p>
+        <span className="absolute inset-y-0 right-0 flex items-center pr-2 pt-7 pointer-events-none">
           <IconArrowDown />
         </span>
       </button>
@@ -73,7 +73,7 @@ const ComboBox: React.FC<ComboBoxProps> = ({
               className="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-500 hover:text-white"
               onClick={() => handleSelect(option)}
             >
-              {option.title}
+              {t(option.title)}
             </li>
           ))}
         </ul>

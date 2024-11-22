@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div
-      className={`flex justify-center md:items-center h-screen w-full bg-background text-foreground
+      className={`flex justify-center md:items-center h-screen w-full bg-background text-foreground transition
         ${i18n.language === "en" ? "ubuntu-font" : "vazirmant-font"}
         `}
       dir={`${i18n.language === "fa" ? "rtl" : "ltr"}`}

@@ -9,6 +9,7 @@ import { IdTitleType } from "../types/IdTitleType";
 import { getLanguages } from "../services/LanguageService";
 import { AxiosError } from "axios";
 import { useTranslation } from "react-i18next";
+import { IconLanguage } from "../assets/icons/IconLanguage";
 
 export const Menu = () => {
   const [isDarkTheme, setIsDarkTheme] = useStoreState("isDarkTheme", false);
@@ -133,7 +134,7 @@ export const Menu = () => {
             </div>
             <div className="rounded-lg w-full bg-background p-3 my-5 shadow-md">
               <ComboBox
-                label={`${t("Language")}:`}
+                label={<IconLanguage />}
                 onSelect={languageHandler}
                 defaultValue={language}
                 options={languages}

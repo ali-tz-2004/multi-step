@@ -76,5 +76,8 @@
 
   "tm": "Background color",
   "Loading": "Loading",
-  "Again": "Again"
+  "Again": "Again",
+
+  "fa": "Persian",
+  "en": "English"
 }
