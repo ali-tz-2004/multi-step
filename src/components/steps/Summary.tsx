@@ -113,10 +113,14 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
 
   const loadAddOns = async () => {
     try {
-      const result =
-        i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
-      setAddOnsList(result.data.filter((x) => getCheckedItems.includes(x.id)));
-      setIsLoading(false);
+      setTimeout(async () => {
+        const result =
+          i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
+        setAddOnsList(
+          result.data.filter((x) => getCheckedItems.includes(x.id))
+        );
+        setIsLoading(false);
+      }, 500);
     } catch (e) {
       const error = e as AxiosError;
       console.error("Error fetching add-ons data:", error);

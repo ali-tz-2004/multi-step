@@ -65,8 +65,8 @@
   "Change": "Change",
   "Total": "Total",
 
-  "TankYou": "Tank you!",
-  "FinalMessage": "Tanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.",
+  "ThankYou": "Thank you!",
+  "FinalMessage": "Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.",
 
   "DarkTheme": "DarkTm",
   "LightTheme": "LightTm",
@@ -75,5 +75,6 @@
   "Select": "Selected",
 
   "tm": "Background color",
-  "Loading": "Loading"
+  "Loading": "Loading",
+  "Again": "Again"
 }

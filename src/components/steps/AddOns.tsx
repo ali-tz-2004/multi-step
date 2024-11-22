@@ -54,10 +54,12 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   useEffect(() => {
     const fetchAddOns = async () => {
       try {
-        const result =
-          i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
-        setAddOnsList(result.data);
-        setIsLoading(false);
+        setTimeout(async () => {
+          const result =
+            i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
+          setAddOnsList(result.data);
+          setIsLoading(false);
+        }, 500);
       } catch (e) {
         const error = e as AxiosError;
         console.error("Error fetching add-ons data:", error);
