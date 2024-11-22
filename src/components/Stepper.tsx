@@ -41,8 +41,8 @@ const Stepper: React.FC<IStepperProps> = ({
           .map((step, index) => (
             <div key={index} className="text-center flex items-center p-4">
               <div
-                className={`w-8 h-8 rounded-full text-white transition-all duration-500 ${
-                  index === currentStep ? "bg-blue-700" : "border"
+                className={`w-8 h-8 rounded-full text-white transition-all duration-300 ${
+                  index === currentStep ? "bg-blue-600" : "border"
                 } ${
                   isFading && index === currentStep
                     ? "animate-fadeOut"
