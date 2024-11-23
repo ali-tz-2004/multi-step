@@ -3,9 +3,14 @@ import { useTranslation } from "react-i18next";
 export interface TfootStepperProps {
   prevStep?: () => void;
   step?: 1 | 2 | 3 | 4;
+  disableNextStep?: boolean;
 }
 
-export const StepFooter = ({ prevStep, step }: TfootStepperProps) => {
+export const StepFooter = ({
+  prevStep,
+  step,
+  disableNextStep = false,
+}: TfootStepperProps) => {
   const { t, i18n } = useTranslation();
 
   return (
@@ -28,6 +33,7 @@ export const StepFooter = ({ prevStep, step }: TfootStepperProps) => {
       <button
         type="submit"
         className="bg-btn-next-step px-4 py-2 text-white rounded-md text-sm hover:bg-btn-next-step-hover"
+        disabled={disableNextStep}
       >
         {`${step === 4 ? t("Confirm") : t("NextStep")}`}
       </button>

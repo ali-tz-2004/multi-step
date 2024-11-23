@@ -20,6 +20,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
   const [addOnsList, setAddOnsList] = useState<AddOnsType[]>([]);
   const [error, setError] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);
+  const [disableNextStep, setDisableNextStep] = useState(true);
 
   const [checkedItems, setCheckedItems] = useStoreState<number[]>(
     "checkedItems",
@@ -59,12 +60,14 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
             i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
           setAddOnsList(result.data);
           setIsLoading(false);
+          setDisableNextStep(false);
         }, 500);
       } catch (e) {
         const error = e as AxiosError;
         console.error("Error fetching add-ons data:", error);
         setError(error.message);
         setIsLoading(false);
+        setDisableNextStep(false);
       }
     };
 
@@ -130,7 +133,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
             </div>
           </label>
         ))}
-        <StepFooter prevStep={prevStep} />
+        <StepFooter prevStep={prevStep} disableNextStep={disableNextStep} />
       </form>
     </div>
   );

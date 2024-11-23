@@ -34,6 +34,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
   const [addOnsList, setAddOnsList] = useState<AddOnsType[]>([]);
   const [total, setTotal] = useState<number>();
   const [isLoading, setIsLoading] = useState(true);
+  const [disableNextStep, setDisableNextStep] = useState(true);
 
   const { t, i18n } = useTranslation();
 
@@ -120,12 +121,14 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
           result.data.filter((x) => getCheckedItems.includes(x.id))
         );
         setIsLoading(false);
+        setDisableNextStep(false);
       }, 500);
     } catch (e) {
       const error = e as AxiosError;
       console.error("Error fetching add-ons data:", error);
       setAddOnsList([]);
       setIsLoading(false);
+      setDisableNextStep(false);
     }
   };
 
@@ -197,7 +200,11 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
         </span>
       </div>
       <br />
-      <StepFooter prevStep={prevStep} step={4} />
+      <StepFooter
+        prevStep={prevStep}
+        step={4}
+        disableNextStep={disableNextStep}
+      />
     </form>
   );
 };
