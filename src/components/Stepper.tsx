@@ -38,21 +38,23 @@ const Stepper: React.FC<IStepperProps> = ({
       <div className="bg-bottom flex justify-center md:flex-col md:justify-start md:bg-slider-desktop bg-slider-mobile bg-no-repeat bg-cover md:p-6 md:w-1/3 overflow-hidden md:rounded-xl pb-28 md:pb-0">
         {steps
           .filter((x) => x.visible)
-          .map((step, index) => (
-            <div key={index} className="text-center flex items-center p-4">
+          .map((step) => (
+            <div key={step.index} className="text-center flex items-center p-4">
               <div
                 className={`w-8 h-8 rounded-full text-white transition-all duration-300 ${
-                  index === currentStep ? "bg-blue-600" : "border"
+                  step.index === currentStep
+                    ? "bg-blue-600"
+                    : step.index < stepIndex
+                    ? "bg-green-500 cursor-pointer"
+                    : "border"
                 } ${
-                  isFading && index === currentStep
+                  isFading && step.index === currentStep
                     ? "animate-fadeOut"
                     : "animate-fadeIn"
-                } ${
-                  index < stepIndex ? "cursor-pointer bg-green-500" : ""
                 } flex items-center justify-center text-xs font-bold`}
-                onClick={() => currentStepHandler(index)}
+                onClick={() => currentStepHandler(step.index)}
               >
-                {index < stepIndex - 1 ? <IconTick /> : index + 1}
+                {step.index < stepIndex - 1 ? <IconTick /> : step.index + 1}
               </div>
 
               <div className="flex flex-col md:px-4 text-start">

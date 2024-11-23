@@ -7,35 +7,35 @@ import { StepType } from "../types/StepType";
 
 export const steps: StepType[] = [
   {
-    index: 1,
+    index: 0,
     title: "Step1",
     description: "YouInfoStepper",
     children: <PersonalInfo />,
     visible: true,
   },
   {
-    index: 2,
+    index: 1,
     title: "Step2",
     description: "SelectPlaneStepper",
     children: <SelectPlan />,
     visible: true,
   },
   {
-    index: 3,
+    index: 2,
     title: "Step3",
     description: "AddOnsStepper",
     children: <AddOns />,
     visible: true,
   },
   {
-    index: 4,
+    index: 3,
     title: "Step4",
     description: "SummaryStepper",
     children: <Summary />,
     visible: true,
   },
   {
-    index: 5,
+    index: 4,
     title: "Step5",
     description: "Final",
     children: <FinalResult />,
