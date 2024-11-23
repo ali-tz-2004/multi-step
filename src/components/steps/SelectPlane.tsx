@@ -6,6 +6,7 @@ import useStoreState from "../../hooks/useStoreState";
 import store from "storejs";
 import { PlaneType } from "../../types/PlaneType";
 import { useTranslation } from "react-i18next";
+import { errorMessageRequired } from "../../constants/ErrorMessages";
 
 interface ISelectPlanProps {
   nextStep?: () => void;
@@ -24,6 +25,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
   );
 
   const [planeId, setPlaneId] = useStoreState("planeId", 0);
+  const [errorMessage, setErrorMessage] = useState("");
   const { t } = useTranslation();
 
   const toggleHandle = () => {
@@ -34,6 +36,10 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
 
   const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!planeId) {
+      setErrorMessage(errorMessageRequired());
+      return;
+    }
     if (nextStep) {
       nextStep();
       const step = store.get("step");
@@ -60,6 +66,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
     <div>
       <h1 className="font-bold text-3xl">{t("SelectYourPlan")}</h1>
       <p className="text-light-gray text-xs pb-8">{t("SelectYourPlanDes")}</p>
+      <p className="text-red-500 text-sm">{!planeId && t(errorMessage)}</p>
       <form onSubmit={submit}>
         <div className="flex justify-between w-full gap-4 flex-col md:flex-row">
           {planCards.map((plane) => (
@@ -68,15 +75,16 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
                 type="radio"
                 id={plane.idTag}
                 className="hidden peer"
-                name="radio"
+                name="planes"
                 value={plane.id}
                 checked={planeId === plane.id}
                 onChange={changeValuePlanHandler}
-                required
               />
               <label
                 htmlFor={plane.idTag}
-                className="block p-4 border rounded-lg cursor-pointer peer-checked:bg-background peer-checked:border-border-input"
+                className={`block p-4 border rounded-lg cursor-pointer peer-checked:bg-background peer-checked:border-border-input
+                  ${!planeId && errorMessage && "border-red-500"}
+                  `}
               >
                 <div className="flex items-start md:block">
                   {plane.icon}
