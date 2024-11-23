@@ -32,7 +32,7 @@ export const Menu = () => {
         setIsMenu(false);
       }, 500);
     } else {
-      setWidthMenu("w-62");
+      setWidthMenu("w-64");
       setIsMenu(true);
     }
   };
@@ -121,10 +121,6 @@ export const Menu = () => {
               <IconClose />
             </div>
             <div className="rounded-lg bg-background w-full p-3 shadow-md">
-              <label className="block text-sm font-medium pb-3">
-                {t("tm")}:
-              </label>
-
               <ToggleButton
                 isToggled={isDarkTheme}
                 onToggle={toggleHandle}

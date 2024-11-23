@@ -50,34 +50,33 @@ const ComboBox: React.FC<ComboBoxProps> = ({
   }, [defaultValue]);
 
   return (
-    <div ref={comboBoxRef} className="relative w-full max-w-xs">
-      {label && <div>{label}</div>}
+    <div ref={comboBoxRef} className="w-full max-w-xs flex">
+      {label && <div className="p-1">{label}</div>}
       <button
         type="button"
-        className="w-full bg-background border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full bg-background border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 relative"
         onClick={toggleDropdown}
       >
         <p className="text-center">
           {t(selectedOption?.title ?? "") || t("Select")}
         </p>
-        <span className="absolute inset-y-0 right-0 flex items-center pr-2 pt-7 pointer-events-none">
+        <span className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
           <IconArrowDown />
         </span>
+        {isOpen && options.length > 0 && (
+          <ul className="absolute z-10 mt-1 w-full bg-background border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto text-center left-0">
+            {options.map((option) => (
+              <li
+                key={option.id}
+                className="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-500 hover:text-white"
+                onClick={() => handleSelect(option)}
+              >
+                {t(option.title)}
+              </li>
+            ))}
+          </ul>
+        )}
       </button>
-
-      {isOpen && options.length > 0 && (
-        <ul className="absolute z-10 mt-1 w-full bg-background border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto text-center">
-          {options.map((option) => (
-            <li
-              key={option.id}
-              className="cursor-pointer select-none relative py-2 pl-3 pr-9 hover:bg-blue-500 hover:text-white"
-              onClick={() => handleSelect(option)}
-            >
-              {t(option.title)}
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 };
