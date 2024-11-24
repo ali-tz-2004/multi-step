@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 interface IStepperProps {
   steps: StepType[];
   currentStep: number;
+  isFadingCard: boolean;
   nextStep: () => void;
   prevStep: () => void;
   goToStep: (index: number) => void;
@@ -15,6 +16,7 @@ interface IStepperProps {
 const Stepper: React.FC<IStepperProps> = ({
   steps,
   currentStep,
+  isFadingCard,
   nextStep,
   prevStep,
   goToStep,
@@ -48,7 +50,7 @@ const Stepper: React.FC<IStepperProps> = ({
                     ? "bg-green-500 cursor-pointer"
                     : "border"
                 } ${
-                  isFading && step.index === currentStep
+                  (isFading || isFadingCard) && step.index === currentStep
                     ? "animate-fadeOut"
                     : "animate-fadeIn"
                 } flex items-center justify-center text-xs font-bold`}

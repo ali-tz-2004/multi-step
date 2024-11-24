@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Stepper from "./Stepper";
 import { steps } from "../data/StepperData";
 import store from "storejs";
@@ -6,16 +6,25 @@ import useStoreState from "../hooks/useStoreState";
 
 export const Card = () => {
   const [currentStep, setCurrentStep] = useStoreState("currentStep", 0);
+  const [isFadingCard, setIsFadingCard] = useState(false);
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
+      setIsFadingCard(true);
       setCurrentStep((prev) => prev + 1);
+      setTimeout(() => {
+        setIsFadingCard(false);
+      }, 500);
     }
   };
 
   const prevStep = () => {
     if (currentStep > 0) {
+      setIsFadingCard(true);
       setCurrentStep((prev) => prev - 1);
+      setTimeout(() => {
+        setIsFadingCard(false);
+      }, 500);
     }
   };
 
@@ -39,6 +48,7 @@ export const Card = () => {
       <Stepper
         steps={steps}
         currentStep={currentStep}
+        isFadingCard={isFadingCard}
         nextStep={nextStep}
         prevStep={prevStep}
         goToStep={goToStep}
