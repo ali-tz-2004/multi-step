@@ -88,10 +88,10 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
   });
 
   return (
-    <div>
+    <div className="transition">
       <h1 className="font-bold text-3xl">{t("PersonalInfo")}</h1>
       <p className="text-light-gray text-xs pb-8">{t("PersonalInfoDes")}</p>
-      <form onSubmit={submit}>
+      <form onSubmit={submit} className="h-full">
         {formInfo.map((field, index) => (
           <div key={index} className="mb-4">
             <div className="flex justify-between">

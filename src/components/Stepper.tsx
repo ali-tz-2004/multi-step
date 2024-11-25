@@ -3,11 +3,13 @@ import { StepType } from "../types/StepType";
 import store from "storejs";
 import { IconTick } from "../assets/icons/IconTIck";
 import { useTranslation } from "react-i18next";
+import { CSSTransition } from "react-transition-group";
 
 interface IStepperProps {
   steps: StepType[];
   currentStep: number;
   isFadingCard: boolean;
+  direction: "next" | "prev";
   nextStep: () => void;
   prevStep: () => void;
   goToStep: (index: number) => void;
@@ -17,6 +19,7 @@ const Stepper: React.FC<IStepperProps> = ({
   steps,
   currentStep,
   isFadingCard,
+  direction,
   nextStep,
   prevStep,
   goToStep,
@@ -31,7 +34,7 @@ const Stepper: React.FC<IStepperProps> = ({
       setTimeout(() => {
         goToStep(index);
         setIsFading(false);
-      }, 500);
+      }, 100);
     }
   };
 
@@ -69,15 +72,27 @@ const Stepper: React.FC<IStepperProps> = ({
       </div>
 
       <div className="md:m-0 top-20 w-full md:w-2/3 p-4 md:p-8 md:px-20 absolute md:static">
-        <div className="rounded-md md:mb-4 bg-card p-5 md:p-0 md:relative h-full">
-          {React.cloneElement(
-            steps[currentStep].children as React.ReactElement,
-            {
-              nextStep,
-              prevStep,
-            }
-          )}
-        </div>
+        <CSSTransition
+          in={!isFading && !isFadingCard}
+          timeout={300}
+          classNames={{
+            enter: "animate-fadeIn",
+            enterActive: "animate-fadeIn",
+            exit: "animate-fadeOut",
+            exitActive: "animate-fadeOut",
+          }}
+          unmountOnExit
+        >
+          <div className="rounded-md md:mb-4 bg-card p-5 md:p-0 md:relative h-full base">
+            {React.cloneElement(
+              steps[currentStep].children as React.ReactElement,
+              {
+                nextStep,
+                prevStep,
+              }
+            )}
+          </div>
+        </CSSTransition>
       </div>
     </div>
   );

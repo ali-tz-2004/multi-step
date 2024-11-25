@@ -7,9 +7,11 @@ import useStoreState from "../hooks/useStoreState";
 export const Card = () => {
   const [currentStep, setCurrentStep] = useStoreState("currentStep", 0);
   const [isFadingCard, setIsFadingCard] = useState(false);
+  const [direction, setDirection] = useState<"next" | "prev">("next");
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) {
+      setDirection("next");
       setIsFadingCard(true);
       setCurrentStep((prev) => prev + 1);
       setTimeout(() => {
@@ -19,6 +21,7 @@ export const Card = () => {
   };
 
   const prevStep = () => {
+    setDirection("prev");
     if (currentStep > 0) {
       setIsFadingCard(true);
       setCurrentStep((prev) => prev - 1);
@@ -44,15 +47,16 @@ export const Card = () => {
   }, [setCurrentStep]);
 
   return (
-    <>
+    <div>
       <Stepper
         steps={steps}
         currentStep={currentStep}
         isFadingCard={isFadingCard}
+        direction={direction}
         nextStep={nextStep}
         prevStep={prevStep}
         goToStep={goToStep}
       />
-    </>
+    </div>
   );
 };
