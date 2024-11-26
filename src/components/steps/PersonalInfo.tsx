@@ -9,6 +9,7 @@ import store from "storejs";
 import useStoreState from "../../hooks/useStoreState";
 import { ErrorMessage } from "../../types/ErrorMessage";
 import { useTranslation } from "react-i18next";
+import { StepHeader } from "./StepHeader";
 
 interface PersonalInfoProps {
   nextStep?: () => void;
@@ -88,10 +89,12 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({ nextStep }) => {
   });
 
   return (
-    <div className="transition">
-      <h1 className="font-bold text-3xl">{t("PersonalInfo")}</h1>
-      <p className="text-light-gray text-xs pb-8">{t("PersonalInfoDes")}</p>
-      <form onSubmit={submit} className="h-full">
+    <div>
+      <StepHeader
+        title={t("PersonalInfo")}
+        description={t("PersonalInfoDes")}
+      />
+      <form onSubmit={submit}>
         {formInfo.map((field, index) => (
           <div key={index} className="mb-4">
             <div className="flex justify-between">

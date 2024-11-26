@@ -7,6 +7,7 @@ import store from "storejs";
 import { PlaneType } from "../../types/PlaneType";
 import { useTranslation } from "react-i18next";
 import { errorMessageRequired } from "../../constants/ErrorMessages";
+import { StepHeader } from "./StepHeader";
 
 interface ISelectPlanProps {
   nextStep?: () => void;
@@ -64,8 +65,10 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
 
   return (
     <div>
-      <h1 className="font-bold text-3xl">{t("SelectYourPlan")}</h1>
-      <p className="text-light-gray text-xs pb-8">{t("SelectYourPlanDes")}</p>
+      <StepHeader
+        title={t("SelectYourPlan")}
+        description={t("SelectYourPlanDes")}
+      />
       <p className="text-red-500 text-sm">{!planeId && t(errorMessage)}</p>
       <form onSubmit={submit}>
         <div className="flex justify-between w-full gap-4 flex-col md:flex-row">

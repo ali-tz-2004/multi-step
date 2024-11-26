@@ -9,6 +9,7 @@ import { AddOnsType } from "../../types/AddOnsType";
 import { getAddOnsEn, getAddOnsFa } from "../../services/AddOnsService";
 import { useTranslation } from "react-i18next";
 import { OrbitProgress } from "react-loading-indicators";
+import { StepHeader } from "./StepHeader";
 
 interface IAddOnsProps {
   nextStep?: () => void;
@@ -76,8 +77,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
 
   return (
     <div>
-      <h1 className="font-bold text-3xl">{t("PickAddOns")}</h1>
-      <p className="text-light-gray text-xs pb-8">{t("PickAddOnsDes")}</p>
+      <StepHeader title={t("PickAddOns")} description={t("PickAddOnsDes")} />
       <Alert
         visible={error !== undefined}
         title="خطا"

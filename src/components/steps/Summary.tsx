@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { getAddOnsEn, getAddOnsFa } from "../../services/AddOnsService";
 import { AxiosError } from "axios";
 import { OrbitProgress } from "react-loading-indicators";
+import { StepHeader } from "./StepHeader";
 
 interface FinalPlaneType {
   title: string;
@@ -137,74 +138,73 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
   }, [i18n.language]);
 
   return (
-    <form onSubmit={confirmHandler}>
-      <h1 className="font-bold text-3xl">{t("FinishingUp")}</h1>
-      <p className="text-light-gray text-xs block pb-8">
-        {t("FinishingUpDes")}
-      </p>
-      <div className="w-full bg-card-summary p-4 rounded-lg">
-        <div className="flex justify-between items-center pb-4">
-          <div>
-            <h3 className="text-sm font-bold">{`${t(plane?.title ?? "")} ${
-              planeType === PlaneType.monthly
-                ? `(${t("Monthly")})`
-                : `(${t("Yearly")})`
-            }`}</h3>
-            <span
-              className="text-xs underline cursor-pointer text-light-gray"
-              onClick={changePlaneHandler}
+    <div>
+      <StepHeader title={t("FinishingUp")} description={t("FinishingUpDes")} />
+      <form onSubmit={confirmHandler}>
+        <div className="w-full bg-card-summary p-4 rounded-lg">
+          <div className="flex justify-between items-center pb-4">
+            <div>
+              <h3 className="text-sm font-bold">{`${t(plane?.title ?? "")} ${
+                planeType === PlaneType.monthly
+                  ? `(${t("Monthly")})`
+                  : `(${t("Yearly")})`
+              }`}</h3>
+              <span
+                className="text-xs underline cursor-pointer text-light-gray"
+                onClick={changePlaneHandler}
+              >
+                {t("Change")}
+              </span>
+            </div>
+            <div>
+              <span className="font-bold text-xs">
+                {t(plane?.moneyText ?? "")}
+              </span>
+            </div>
+          </div>
+          <hr />
+          {isLoading && (
+            <div className="text-center">
+              <OrbitProgress
+                dense
+                color="#32cd32"
+                size="large"
+                text={t("Loading")}
+                textColor=""
+              />
+            </div>
+          )}
+          {checkedItems.map((x, index) => (
+            <div
+              className="flex justify-between py-1 mt-2 overflow-hidden"
+              key={index}
             >
-              {t("Change")}
-            </span>
-          </div>
-          <div>
-            <span className="font-bold text-xs">
-              {t(plane?.moneyText ?? "")}
-            </span>
-          </div>
+              <span className="text-light-gray text-xs">{t(x.title)}</span>
+              <span className="text-xs">{t(x.moneyText)}</span>
+            </div>
+          ))}
         </div>
-        <hr />
-        {isLoading && (
-          <div className="text-center">
-            <OrbitProgress
-              dense
-              color="#32cd32"
-              size="large"
-              text={t("Loading")}
-              textColor=""
-            />
-          </div>
-        )}
-        {checkedItems.map((x, index) => (
-          <div
-            className="flex justify-between py-1 mt-2 overflow-hidden"
-            key={index}
-          >
-            <span className="text-light-gray text-xs">{t(x.title)}</span>
-            <span className="text-xs">{t(x.moneyText)}</span>
-          </div>
-        ))}
-      </div>
-      <div className="w-full p-4 flex justify-between">
-        <span className="text-light-gray text-xs">{`${t("Total")} ${
-          planeType === PlaneType.monthly ? t("PerMonth") : t("PerYear")
-        }`}</span>
-        <span className="text-border-input font-bold text-lg">
-          {i18n.language === "fa"
-            ? `${total} ${t("TypeMoney")}/ ${
-                planeType === PlaneType.monthly ? t("Mo") : t("Yr")
-              }`
-            : `${t("TypeMoney")}${total}/ ${
-                planeType === PlaneType.monthly ? t("Mo") : t("Yr")
-              }`}
-        </span>
-      </div>
-      <br />
-      <StepFooter
-        prevStep={prevStep}
-        step={4}
-        disableNextStep={disableNextStep}
-      />
-    </form>
+        <div className="w-full p-4 flex justify-between">
+          <span className="text-light-gray text-xs">{`${t("Total")} ${
+            planeType === PlaneType.monthly ? t("PerMonth") : t("PerYear")
+          }`}</span>
+          <span className="text-border-input font-bold text-lg">
+            {i18n.language === "fa"
+              ? `${total} ${t("TypeMoney")}/ ${
+                  planeType === PlaneType.monthly ? t("Mo") : t("Yr")
+                }`
+              : `${t("TypeMoney")}${total}/ ${
+                  planeType === PlaneType.monthly ? t("Mo") : t("Yr")
+                }`}
+          </span>
+        </div>
+        <br />
+        <StepFooter
+          prevStep={prevStep}
+          step={4}
+          disableNextStep={disableNextStep}
+        />
+      </form>
+    </div>
   );
 };
