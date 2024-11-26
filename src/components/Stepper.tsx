@@ -37,13 +37,13 @@ const Stepper: React.FC<IStepperProps> = ({
 
   return (
     <div className="w-full flex flex-col md:flex-row md:w-50 rounded-xl shadow-md md:p-3 md:h-30 md:static md:bg-card bg-background absolute top-0 left-0">
-      <div className="bg-bottom flex justify-center md:flex-col md:justify-start md:bg-slider-desktop bg-slider-mobile bg-no-repeat bg-cover md:p-6 md:w-1/3 overflow-hidden md:rounded-xl pb-28 md:pb-0 w-full relative md:static">
+      <div className="bg-bottom flex justify-center md:flex-col md:justify-start md:bg-slider-desktop bg-slider-mobile bg-no-repeat bg-cover md:p-6 md:w-1/3 md:rounded-xl pb-28 md:pb-0 w-full relative md:static transition">
         {steps
           .filter((x) => x.visible)
           .map((step) => (
-            <div key={step.index} className="text-center flex items-center p-4">
+            <div key={step.index} className="flex items-center p-4">
               <div
-                className={`w-8 h-8 rounded-full text-white  ${
+                className={`w-8 h-8 rounded-full text-white ${
                   step.index === currentStep
                     ? "bg-blue-600"
                     : step.index < stepIndex
@@ -63,7 +63,7 @@ const Stepper: React.FC<IStepperProps> = ({
                 </div>
               </div>
 
-              <div className="flex flex-col md:px-4 text-start">
+              <div className="flex flex-col md:px-4">
                 <span className="text-white font-semibold text-xs hidden md:block">
                   {t(step.description)}
                 </span>
@@ -72,7 +72,7 @@ const Stepper: React.FC<IStepperProps> = ({
           ))}
       </div>
 
-      <div className="md:m-0 top-20 md:w-2/3 p-4 md:p-8 md:px-20 absolute md:static w-full">
+      <div className="top-20 md:w-2/3 p-4 md:p-8 md:px-20 absolute md:static w-full">
         <div
           className={`rounded-md md:mb-4 bg-card p-5 md:p-0 md:relative h-full opacity-0 ${
             isFading || isFadingCard ? "" : "animate-fadeIn"
