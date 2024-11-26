@@ -52,7 +52,6 @@ export const Card = () => {
         steps={steps}
         currentStep={currentStep}
         isFadingCard={isFadingCard}
-        direction={direction}
         nextStep={nextStep}
         prevStep={prevStep}
         goToStep={goToStep}

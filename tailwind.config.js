@@ -31,17 +31,25 @@ module.exports = {
         "slider-mobile": "var(--slider-mobile)",
       },
       animation: {
-        fadeIn: "fadeIn 0.2s ease-in-out forwards",
-        fadeOut: "fadeOut 0.2s ease-in-out forwards",
+        fadeIn: "fadeIn 0.1s ease-in-out forwards",
+        fadeOut: "fadeOut 0.1s ease-in-out forwards",
       },
       keyframes: {
         fadeIn: {
-          "0%": { opacity: "0.5" },
-          "100%": { opacity: "1" },
+          "0%": { opacity:" 0;" },
+          "20%": { opacity:" 0;" },
+          "40%": { opacity: "0.3;" },
+          "60%": { opacity: "0.5;" },
+          "80%": { opacity: "0.9;" },
+          "100%": { opacity:" 1;" }
         },
         fadeOut: {
-          "0%": { opacity: "1" },
-          "100%": { opacity: "0.5" },
+          "0%": { opacity: "0;"},
+          "20%": { opacity: "0;"},
+          "40%": { opacity: "0.3" },
+          "60%": { opacity: "0.5" },
+          "80%": { opacity: "0.9" },
+          "100%": { opacity: "1;"}
         },
       },
     },

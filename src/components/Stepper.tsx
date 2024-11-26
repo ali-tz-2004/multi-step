@@ -3,13 +3,11 @@ import { StepType } from "../types/StepType";
 import store from "storejs";
 import { IconTick } from "../assets/icons/IconTIck";
 import { useTranslation } from "react-i18next";
-import { CSSTransition } from "react-transition-group";
 
 interface IStepperProps {
   steps: StepType[];
   currentStep: number;
   isFadingCard: boolean;
-  direction: "next" | "prev";
   nextStep: () => void;
   prevStep: () => void;
   goToStep: (index: number) => void;
@@ -19,7 +17,6 @@ const Stepper: React.FC<IStepperProps> = ({
   steps,
   currentStep,
   isFadingCard,
-  direction,
   nextStep,
   prevStep,
   goToStep,
@@ -34,7 +31,7 @@ const Stepper: React.FC<IStepperProps> = ({
       setTimeout(() => {
         goToStep(index);
         setIsFading(false);
-      }, 100);
+      }, 500);
     }
   };
 
@@ -46,7 +43,7 @@ const Stepper: React.FC<IStepperProps> = ({
           .map((step) => (
             <div key={step.index} className="text-center flex items-center p-4">
               <div
-                className={`w-8 h-8 rounded-full text-white transition-all duration-300 ${
+                className={`w-8 h-8 rounded-full text-white opacity-0 ${
                   step.index === currentStep
                     ? "bg-blue-600"
                     : step.index < stepIndex
@@ -54,7 +51,7 @@ const Stepper: React.FC<IStepperProps> = ({
                     : "border"
                 } ${
                   (isFading || isFadingCard) && step.index === currentStep
-                    ? "animate-fadeOut"
+                    ? ""
                     : "animate-fadeIn"
                 } flex items-center justify-center text-xs font-bold`}
                 onClick={() => currentStepHandler(step.index)}
@@ -72,27 +69,19 @@ const Stepper: React.FC<IStepperProps> = ({
       </div>
 
       <div className="md:m-0 top-20 w-full md:w-2/3 p-4 md:p-8 md:px-20 absolute md:static">
-        <CSSTransition
-          in={!isFading && !isFadingCard}
-          timeout={300}
-          classNames={{
-            enter: "animate-fadeIn",
-            enterActive: "animate-fadeIn",
-            exit: "animate-fadeOut",
-            exitActive: "animate-fadeOut",
-          }}
-          unmountOnExit
+        <div
+          className={`rounded-md md:mb-4 bg-card p-5 md:p-0 md:relative h-full opacity-0 ${
+            isFading || isFadingCard ? "" : "animate-fadeIn"
+          }`}
         >
-          <div className="rounded-md md:mb-4 bg-card p-5 md:p-0 md:relative h-full base">
-            {React.cloneElement(
-              steps[currentStep].children as React.ReactElement,
-              {
-                nextStep,
-                prevStep,
-              }
-            )}
-          </div>
-        </CSSTransition>
+          {React.cloneElement(
+            steps[currentStep].children as React.ReactElement,
+            {
+              nextStep,
+              prevStep,
+            }
+          )}
+        </div>
       </div>
     </div>
   );
