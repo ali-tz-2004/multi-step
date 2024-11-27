@@ -2,7 +2,7 @@ import { IconAdvanced } from "../assets/icons/IconAdvanced";
 import { IconArcade } from "../assets/icons/IconArcade";
 import { IconPro } from "../assets/icons/IconPro";
 
-interface IPlanCards {
+export interface PlanCards {
   id: number;
   idTag: string;
   icon: React.ReactNode;
@@ -15,7 +15,7 @@ interface IPlanCards {
   moneyYear: string;
 }
 
-export const planCards: IPlanCards[] = [
+export const planCards: PlanCards[] = [
   {
     id: 1,
     idTag: "plane-1",

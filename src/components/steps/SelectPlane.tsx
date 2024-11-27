@@ -8,6 +8,7 @@ import { PlaneType } from "../../types/PlaneType";
 import { useTranslation } from "react-i18next";
 import { errorMessageRequired } from "../../constants/ErrorMessages";
 import { StepHeader } from "./StepHeader";
+import { SelectCards } from "../SelectCards";
 
 interface ISelectPlanProps {
   nextStep?: () => void;
@@ -72,49 +73,13 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
       <p className="text-red-500 text-sm">{!planeId && t(errorMessage)}</p>
       <form onSubmit={submit}>
         <div className="flex justify-between w-full gap-4 flex-col md:flex-row">
-          {planCards.map((plane) => (
-            <div className="flex-1" key={plane.id}>
-              <input
-                type="radio"
-                id={plane.idTag}
-                className="hidden peer"
-                name="planes"
-                value={plane.id}
-                checked={planeId === plane.id}
-                onChange={changeValuePlanHandler}
-              />
-              <label
-                htmlFor={plane.idTag}
-                className={`block p-4 border rounded-lg cursor-pointer peer-checked:bg-background peer-checked:border-border-input
-                  ${!planeId && errorMessage && "border-red-500"}
-                  `}
-              >
-                <div className="flex items-start md:block">
-                  {plane.icon}
-                  <div className="px-2 md:px-0">
-                    <h3 className="font-bold text-sm md:pt-6 md:pr-0">
-                      {t(plane.title)}
-                    </h3>
-                    {planeType === PlaneType.monthly && (
-                      <span className="text-light-gray text-xs">
-                        {t(plane.month)}
-                      </span>
-                    )}
-                    {planeType === PlaneType.yearly && (
-                      <>
-                        <span className="text-light-gray text-xs block">
-                          {t(plane.year)}
-                        </span>
-                        <span className="text-light-gray text-xs block">
-                          {t(plane.messageFree ?? "")}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </label>
-            </div>
-          ))}
+          <SelectCards
+            Cards={planCards}
+            ChangeCard={changeValuePlanHandler}
+            ErrorMessage={errorMessage}
+            Id={planeId}
+            Type={planeType}
+          />
         </div>
         <br />
         <div className="flex">
