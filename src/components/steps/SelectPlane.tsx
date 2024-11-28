@@ -72,7 +72,7 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
       />
       <p className="text-red-500 text-sm">{!planeId && t(errorMessage)}</p>
       <form onSubmit={submit}>
-        <div className="flex justify-between w-full gap-4 flex-col md:flex-row">
+        <div className="flex justify-between w-full gap-4 flex-col md:flex-row pb-6">
           <SelectCards
             Cards={planCards}
             ChangeCard={changeValuePlanHandler}
@@ -81,7 +81,6 @@ export const SelectPlan: React.FC<ISelectPlanProps> = ({
             Type={planeType}
           />
         </div>
-        <br />
         <div className="flex">
           <div className="bg-background w-full h-10 rounded-lg">
             <ToggleButton

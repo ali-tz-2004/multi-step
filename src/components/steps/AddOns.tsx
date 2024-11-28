@@ -55,21 +55,23 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
 
   useEffect(() => {
     const fetchAddOns = async () => {
-      try {
-        setTimeout(async () => {
+      setTimeout(async () => {
+        try {
           const result =
             i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
           setAddOnsList(result.data);
           setIsLoading(false);
           setDisableNextStep(false);
-        }, 500);
-      } catch (e) {
-        const error = e as AxiosError;
-        console.error("Error fetching add-ons data:", error);
-        setError(error.message);
-        setIsLoading(false);
-        setDisableNextStep(false);
-      }
+          setError("");
+        } catch (e) {
+          const error = e as AxiosError;
+          console.error("Error fetching add-ons data:", error);
+          setError(error.message);
+          setIsLoading(false);
+          setAddOnsList([]);
+          setDisableNextStep(false);
+        }
+      }, 500);
     };
 
     fetchAddOns();
@@ -79,8 +81,8 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
     <div>
       <StepHeader title={t("PickAddOns")} description={t("PickAddOnsDes")} />
       <Alert
-        visible={error !== undefined}
-        title="خطا"
+        visible={!!error}
+        title={t("error")}
         message={error}
         onClose={() => setError(undefined)}
       />
