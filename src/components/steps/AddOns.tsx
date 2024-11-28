@@ -71,7 +71,7 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
           setAddOnsList([]);
           setDisableNextStep(false);
         }
-      }, 500);
+      }, 700);
     };
 
     fetchAddOns();

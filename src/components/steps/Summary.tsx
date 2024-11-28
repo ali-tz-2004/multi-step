@@ -114,8 +114,8 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
   }, [planeType, addOnsList, i18n.language, setCheckedItems]);
 
   const loadAddOns = async () => {
-    try {
-      setTimeout(async () => {
+    setTimeout(async () => {
+      try {
         const result =
           i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
         setAddOnsList(
@@ -123,14 +123,14 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
         );
         setIsLoading(false);
         setDisableNextStep(false);
-      }, 500);
-    } catch (e) {
-      const error = e as AxiosError;
-      console.error("Error fetching add-ons data:", error);
-      setAddOnsList([]);
-      setIsLoading(false);
-      setDisableNextStep(false);
-    }
+      } catch (e) {
+        const error = e as AxiosError;
+        console.error("Error fetching add-ons data:", error);
+        setAddOnsList([]);
+        setIsLoading(false);
+        setDisableNextStep(false);
+      }
+    }, 700);
   };
 
   useEffect(() => {
