@@ -1,6 +1,10 @@
-# Todo App
+# Multi step
 
-![multi step](./public/images/multi-step-dark.png)(./public/images/multi-step-light.png)
+Dark mode:  
+![multi step dark](./public/images/multi-step-dark.png)
+
+Light mode:  
+![multi step light](./public/images/multi-step-light.png)
 
 ## Welcome! 👋
 
