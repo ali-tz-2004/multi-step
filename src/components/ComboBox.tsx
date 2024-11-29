@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { IconArrowDown } from "../assets/icons/IconArrowDown";
 import { IdTitleType } from "../types/IdTitleType";
 import { useTranslation } from "react-i18next";
+import { LanguageType } from "../types/LanguageType";
 
 interface ComboBoxProps {
-  options: IdTitleType[];
+  options: IdTitleType<LanguageType>[];
   label?: React.ReactNode;
   defaultValue?: IdTitleType;
-  onSelect: (value: IdTitleType) => void;
+  onSelect: (value: IdTitleType<LanguageType>) => void;
 }
 
 const ComboBox: React.FC<ComboBoxProps> = ({
@@ -23,7 +24,7 @@ const ComboBox: React.FC<ComboBoxProps> = ({
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleSelect = (option: IdTitleType) => {
+  const handleSelect = (option: IdTitleType<LanguageType>) => {
     setSelectedOption(option);
     onSelect(option);
     setIsOpen(false);

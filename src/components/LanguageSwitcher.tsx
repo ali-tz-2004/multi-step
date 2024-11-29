@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Language_EN, Language_FA } from "../constants/Languages";
 
 export const LanguageSwitcher: React.FC = () => {
   const { i18n, t } = useTranslation();
 
   const toggleLanguage = () => {
-    const newLang = i18n.language === "en" ? "fa" : "en";
+    const newLang = i18n.language === Language_EN ? Language_FA : Language_EN;
     i18n.changeLanguage(newLang);
   };
 

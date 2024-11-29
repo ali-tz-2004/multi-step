@@ -9,6 +9,7 @@ import { getAddOnsEn, getAddOnsFa } from "../../services/AddOnsService";
 import { AxiosError } from "axios";
 import { OrbitProgress } from "react-loading-indicators";
 import { StepHeader } from "./StepHeader";
+import { Language_FA } from "../../constants/Languages";
 
 interface FinalPlaneType {
   title: string;
@@ -117,7 +118,9 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
     setTimeout(async () => {
       try {
         const result =
-          i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
+          i18n.language === Language_FA
+            ? await getAddOnsFa()
+            : await getAddOnsEn();
         setAddOnsList(
           result.data.filter((x) => getCheckedItems.includes(x.id))
         );
@@ -189,7 +192,7 @@ export const Summary: React.FC<SummaryProps> = ({ prevStep, nextStep }) => {
             planeType === PlaneType.monthly ? t("PerMonth") : t("PerYear")
           }`}</span>
           <span className="text-border-input font-bold text-lg">
-            {i18n.language === "fa"
+            {i18n.language === Language_FA
               ? `${total} ${t("TypeMoney")}/ ${
                   planeType === PlaneType.monthly ? t("Mo") : t("Yr")
                 }`

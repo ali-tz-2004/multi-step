@@ -10,16 +10,21 @@ import { getLanguages } from "../services/LanguageService";
 import { AxiosError } from "axios";
 import { useTranslation } from "react-i18next";
 import { IconLanguage } from "../assets/icons/IconLanguage";
+import { LanguageType } from "../types/LanguageType";
+import { Language_EN, Language_FA } from "../constants/Languages";
 
 export const Menu = () => {
   const [isDarkTheme, setIsDarkTheme] = useStoreState("isDarkTheme", false);
   const [isMenu, setIsMenu] = useState(false);
 
-  const [language, setLanguage] = useStoreState<IdTitleType>("language", {
-    id: 1,
-    title: "en",
-  });
-  const [languages, setLanguages] = useState<IdTitleType[]>([]);
+  const [language, setLanguage] = useStoreState<IdTitleType<LanguageType>>(
+    "language",
+    {
+      id: 1,
+      title: Language_EN,
+    }
+  );
+  const [languages, setLanguages] = useState<IdTitleType<LanguageType>[]>([]);
   const [widthMenu, setWidthMenu] = useState("w-0");
 
   const { t, i18n } = useTranslation();
@@ -49,8 +54,8 @@ export const Menu = () => {
     store.set("isDarkTheme", nextIsDarkTheme);
   };
 
-  const languageHandler = (selectedLanguage: IdTitleType) => {
-    const newLang = selectedLanguage.id === 1 ? "en" : "fa";
+  const languageHandler = (selectedLanguage: IdTitleType<LanguageType>) => {
+    const newLang = selectedLanguage.id === 1 ? Language_EN : Language_FA;
     i18n.changeLanguage(newLang);
     setLanguage(selectedLanguage);
   };
@@ -76,18 +81,20 @@ export const Menu = () => {
   }, [setIsDarkTheme]);
 
   useEffect(() => {
-    const storedLanguage = store.get("language") as IdTitleType | undefined;
+    const storedLanguage = store.get("language") as
+      | IdTitleType<LanguageType>
+      | undefined;
     if (storedLanguage) {
       setLanguage(storedLanguage);
     } else {
-      setLanguage({ id: 1, title: "en" });
+      setLanguage({ id: 1, title: Language_EN });
     }
   }, [setLanguage]);
 
   useEffect(() => {
     if (languages.length > 0) {
       const defaultLang =
-        i18n.language === "en"
+        i18n.language === Language_EN
           ? languages.find((x) => x.id === 1)
           : languages.find((x) => x.id === 2);
 

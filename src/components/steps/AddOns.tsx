@@ -10,6 +10,7 @@ import { getAddOnsEn, getAddOnsFa } from "../../services/AddOnsService";
 import { useTranslation } from "react-i18next";
 import { OrbitProgress } from "react-loading-indicators";
 import { StepHeader } from "./StepHeader";
+import { Language_FA } from "../../constants/Languages";
 
 interface IAddOnsProps {
   nextStep?: () => void;
@@ -58,7 +59,9 @@ export const AddOns: React.FC<IAddOnsProps> = ({ nextStep, prevStep }) => {
       setTimeout(async () => {
         try {
           const result =
-            i18n.language === "fa" ? await getAddOnsFa() : await getAddOnsEn();
+            i18n.language === Language_FA
+              ? await getAddOnsFa()
+              : await getAddOnsEn();
           setAddOnsList(result.data);
           setIsLoading(false);
           setDisableNextStep(false);

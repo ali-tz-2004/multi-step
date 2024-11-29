@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Language_FA } from "../../constants/Languages";
 
 export interface TfootStepperProps {
   prevStep?: () => void;
@@ -16,7 +17,7 @@ export const StepFooter = ({
   return (
     <div
       className={`fixed md:absolute ${
-        i18n.language === "fa" ? "left-0" : "right-0"
+        i18n.language === Language_FA ? "left-0" : "right-0"
       } bg-card w-full p-4 bottom-0 md:p-0 ${
         step === 1 ? "text-end" : "flex justify-between"
       }`}
